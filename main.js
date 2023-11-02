@@ -1,160 +1,109 @@
-import { CLOSE_ICON, MESSAGE_ICON, styles } from "./assets.js";
+import { styles } from './assets.js'
+import { data } from './quiz.js'
+import { createApp } from './vue.js'
 
 class MessageWidget {
-  constructor(position = "bottom-right") {
-    this.position = this.getPosition(position);
-    this.open = false;
-    this.initialize();
-    this.injectStyles();
+  constructor(position = 'bottom-right') {
+    this.position = this.getPosition(position)
+    this.open = false
+    this.initialize()
+    this.injectStyles()
+    this.vue()
   }
 
-  position = "";
-  open = false;
-  widgetContainer = null;
+  position = ''
+  widgetContainer = null
 
   getPosition(position) {
-    const [vertical, horizontal] = position.split("-");
+    const [vertical, horizontal] = position.split('-')
     return {
-      [vertical]: "30px",
-      [horizontal]: "30px",
-    };
+      [vertical]: '30px',
+      [horizontal]: '30px'
+    }
   }
 
   async initialize() {
     /**
      * Create and append a div element to the document body
      */
-    const container = document.createElement("div");
-    container.style.position = "fixed";
+    const container = document.createElement('div')
+    container.style.position = 'fixed'
     Object.keys(this.position).forEach(
       (key) => (container.style[key] = this.position[key])
-    );
-    document.body.appendChild(container);
+    )
+    document.body.appendChild(container)
 
-    /**
-     * Create a button element and give it a class of button__container
-     */
-    const buttonContainer = document.createElement("button");
-    buttonContainer.classList.add("button__container");
-
-    /**
-     * Create a span element for the widget icon, give it a class of 'widget__icon', update it's innerHTML property to an icon which would serve as the widget icon.
-     */
-    const widgetIconElement = document.createElement("span");
-    widgetIconElement.innerHTML = MESSAGE_ICON;
-    widgetIconElement.classList.add("widget__icon");
-    this.widgetIcon = widgetIconElement;
-
-    /**
-     * Create a span element for the close icon, give it a class of 'widget__icon' and 'widget__hidden' which would be removed whenever the widget is closed, update it's innerHTML property to an icon which would serve as the widget icon during that state.
-     */
-    const closeIconElement = document.createElement("span");
-    closeIconElement.innerHTML = CLOSE_ICON;
-    closeIconElement.classList.add("widget__icon", "widget__hidden");
-    this.closeIcon = closeIconElement;
-
-    /**
-     * Append both icons created to the button element and add a `click` event listener on the button to toggle the widget open and close.
-     */
-    buttonContainer.appendChild(this.widgetIcon);
-    buttonContainer.appendChild(this.closeIcon);
-    buttonContainer.addEventListener("click", this.toggleOpen.bind(this));
-
-    /**
-     * Create a container for the widget and add the following classes:- "widget__hidden", "widget__container"
-     */
-    this.widgetContainer = document.createElement("div");
-    this.widgetContainer.classList.add("widget__hidden", "widget__container");
-
-    /**
-     * Invoke the `createWidget()` method
-     */
-    this.createWidgetContent();
-
-    /**
-     * Append the widget's content and the button to the container
-     */
-    container.appendChild(this.widgetContainer);
-    container.appendChild(buttonContainer);
+    this.widgetContainer = document.createElement('div')
+    this.createWidgetContent()
+    container.appendChild(this.widgetContainer)
   }
 
   createWidgetContent() {
     this.widgetContainer.innerHTML = `
-        <header class="widget__header">
-            <h3>Start a conversation</h3>
-            <p>We usually respond within a few hours</p>
-        </header>
-
-        <form>
-            <div class="form__field">
-                <label for="name">Name</label>
-                <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Enter your name"
-                />
+        <div id="quiz_widget">
+          <Transition name="fade">
+            <div v-if="open" class="widget__container">
+              <div class="message__container">
+                <div v-html="data[currentId].text" class="message_title"></div>
+                <div class="message_actions">
+                  <button @click="changeSlide(btn.to)" v-for="btn in data[currentId].actions" :key="btn.title">
+                    {{ btn.title }}
+                  </button>
+                </div>
+              </div>
             </div>
-
-            <div class="form__field">
-                <label for="email">Email</label>
-                <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Enter your email"
-                />
-            </div>
-
-            <div class="form__field">
-                <label for="subject">Subject</label>
-                <input
-                type="text"
-                id="subject"
-                name="subject"
-                placeholder="Enter Message Subject"
-                />
-            </div>
-
-            <div class="form__field">
-                <label for="message">Message</label>
-                <textarea
-                id="message"
-                name="message"
-                placeholder="Enter your message"
-                rows="6"
-                ></textarea>
-            </div>
-
-            <button>Send Message</button>
-        </form>
-    `;
+          </Transition>
+          <button @click="toggleOpen()" class="button__container">
+            <Transition name="fade">
+              <span v-if="!open" class="widget__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-question-mark" width="32" height="32" stroke-width="2" stroke="#FFFFFF" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M8 8a3.5 3 0 0 1 3.5 -3h1a3.5 3 0 0 1 3.5 3a3 3 0 0 1 -2 3a3 4 0 0 0 -2 4"></path>
+                    <path d="M12 19l0 .01"></path>
+                </svg>
+              </span>
+              <span v-else class="widget__icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+              </span>
+            </Transition>
+          </button>
+        </div>
+    `
   }
 
   injectStyles() {
-    const styleTag = document.createElement("style");
-    styleTag.innerHTML = styles.replace(/^\s+|\n/gm, "");
+    const styleTag = document.createElement('style')
+    styleTag.innerHTML = styles.replace(/^\s+|\n/gm, '')
 
-    document.head.appendChild(styleTag);
+    document.head.appendChild(styleTag)
   }
 
-  toggleOpen() {
-    this.open = !this.open;
-    if (this.open) {
-      this.widgetIcon.classList.add("widget__hidden");
-      this.closeIcon.classList.remove("widget__hidden");
-      this.widgetContainer.classList.remove("widget__hidden");
-    } else {
-      this.createWidgetContent();
-      this.widgetIcon.classList.remove("widget__hidden");
-      this.closeIcon.classList.add("widget__hidden");
-      this.widgetContainer.classList.add("widget__hidden");
-    }
+  vue() {
+    createApp({
+      data() {
+        return {
+          open: false,
+          currentId: 0,
+          data: data
+        }
+      },
+      methods: {
+        toggleOpen() {
+          this.open = !this.open
+        },
+        changeSlide(id) {
+          this.currentId = id
+        }
+      }
+    }).mount('#quiz_widget')
   }
 }
 
 function initializeWidget() {
-  return new MessageWidget();
+  return new MessageWidget()
 }
 
-initializeWidget();
+initializeWidget()
