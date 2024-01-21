@@ -1,67 +1,14 @@
+@font-face {
+  font-family: 'Favorit Pro';
+  src: url('/Favorit_pro_moex.woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-@font-face {
-  font-family: 'FavoritPro';
-  src: url('/fonts/FavoritPro-Regular.eot');
-  src: url('/fonts/FavoritPro-Regular.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/FavoritPro-Regular.woff2') format('woff2'),
-    url('/fonts/FavoritPro-Regular.woff') format('woff'),
-    url('/fonts/FavoritPro-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'FavoritPro';
-  src: url('/fonts/FavoritPro-Book.eot');
-  src: url('/fonts/FavoritPro-Book.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/FavoritPro-Book.woff2') format('woff2'),
-    url('/fonts/FavoritPro-Book.woff') format('woff'),
-    url('/fonts/FavoritPro-Book.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'FavoritPro';
-  src: url('/fonts/FavoritPro-BoldMOEX.eot');
-  src: url('/fonts/FavoritPro-BoldMOEX.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/FavoritPro-BoldMOEX.woff2') format('woff2'),
-    url('/fonts/FavoritPro-BoldMOEX.woff') format('woff'),
-    url('/fonts/FavoritPro-BoldMOEX.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'FavoritPro';
-  src: url('/fonts/FavoritPro-Light.eot');
-  src: url('/fonts/FavoritPro-Light.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/FavoritPro-Light.woff2') format('woff2'),
-    url('/fonts/FavoritPro-Light.woff') format('woff'),
-    url('/fonts/FavoritPro-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'FavoritPro';
-  src: url('/fonts/FavoritPro-Medium.eot');
-  src: url('/fonts/FavoritPro-Medium.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/FavoritPro-Medium.woff2') format('woff2'),
-    url('/fonts/FavoritPro-Medium.woff') format('woff'),
-    url('/fonts/FavoritPro-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
 }
 
 :root {
@@ -81,7 +28,7 @@
 }
 
 #quiz_widget {
-  font-family: 'FavoritPro';
+  font-family: 'Favorit Pro';
 }
 
 .fade-enter-active,
@@ -94,6 +41,17 @@
   opacity: 0;
 }
 
+.chat-enter-active,
+.chat-leave-active {
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.chat-enter-from,
+.chat-leave-to {
+  opacity: 0;
+  transform: translateY(100px);
+}
+
 .widget__icon {
   cursor: pointer;
   position: absolute;
@@ -104,34 +62,69 @@
   align-items: center;
   top: 0;
   left: 0;
-
-  svg {
-    width: 24px;
-    height: 24px;
-    scale: 1.4;
-  }
 }
 
 .button__container {
   border: none;
-  background-color: var(--moex-red);
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
+  width: 74px;
+  height: 74px;
   cursor: pointer;
+  box-shadow: 0px 4px 24px 0px #00000033;
+  background: white;
+  position: relative;
+  border-radius: 50%;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 78px;
+    height: 78px;
+    background: linear-gradient(white 0 0) padding-box,
+      /*this is your grey background*/
+        linear-gradient(to right, #9c20aa, #fb3570) border-box;
+    border: 2px solid transparent;
+
+    border-radius: 50%;
+    clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);
+    top: 50%;
+    left: -5px;
+    z-index: -1;
+    transform: translateY(-50%);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 78px;
+    height: 78px;
+    background: linear-gradient(white 0 0) padding-box,
+      /*this is your grey background*/
+        linear-gradient(to right, #9c20aa, #fb3570) border-box;
+    border: 2px solid transparent;
+
+    border-radius: 50%;
+    clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+    top: 50%;
+    right: -5px;
+    z-index: -1;
+    transform: translateY(-50%);
+  }
 }
 
 .widget__container {
-  height: 550px;
+  height: min(80vh, 670px);
   background: white;
-  border-radius: 20px;
-  box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.1);
-  width: 400px;
+  border-radius: 24px;
+  box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--Main-Black-300, #d1d2d5);
+  width: 380px;
   overflow: auto;
-  right: 75px;
-  bottom: 0;
+  right: 0px;
+  bottom: calc(78px + 16px);
   position: absolute;
   padding: 20px;
+  display: flex;
+  align-items: flex-end;
 }
 
 .message__container {
@@ -140,6 +133,27 @@
   gap: 10px;
   color: white;
   max-width: 315px;
+}
+
+.messages__block {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--Main-Black-800, #343537);
+  display: flex;
+  gap: 4px;
+  flex-direction: column;
+  max-width: 280px;
+
+  .msg {
+    border-radius: 0px 24px 24px 24px;
+    color: var(--Main-Black-800);
+    white-space-collapse: preserve-breaks;
+    background: var(--main-black-200);
+    padding: 12px;
+
+  }
 }
 
 .message_title {
@@ -155,6 +169,7 @@
 .message_actions {
   display: flex;
   flex-direction: column;
+  margin-top: 10px;
   gap: 10px;
   button {
     border: none;
@@ -178,4 +193,12 @@
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.message__author {
+  color: var(--main-black-600);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
 }
