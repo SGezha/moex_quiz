@@ -88,12 +88,24 @@ export const data = {
       }
     },
     O_1: {
+      author: 'MOEX',
+      messages: [
+        {
+          text: `Какая выручка у вашей компании за последний календарный год?`
+        }
+      ],
       on: {
-        'to O_2': {
-          target: 'O_2'
-        },
         'to bad final O': {
-          target: 'bad final O'
+          target: 'bad final O',
+          label: 'меньше 120 млн'
+        },
+        'to O_2_1': {
+          target: 'O_2',
+          label: 'от 120 млн до 1 млрд'
+        },
+        'to O_2_2': {
+          target: 'O_2',
+          label: 'больше 1 млрд.'
         }
       }
     },
@@ -120,12 +132,20 @@ export const data = {
       }
     },
     O_2: {
+      author: 'MOEX',
+      messages: [
+        {
+          text: `Сколько существует ваш бизнес*? Напишите количество лет (Например, 3)`
+        }
+      ],
       on: {
-        'to O_3': {
-          target: 'O_3'
-        },
         'to bad final O': {
-          target: 'bad final O'
+          target: 'bad final O',
+          label: 'меньше 3 лет'
+        },
+        'to O_3': {
+          target: 'O_3',
+          label: 'больше 3 лет'
         }
       }
     },
@@ -153,12 +173,20 @@ export const data = {
       }
     },
     O_3: {
+      author: 'MOEX',
+      messages: [
+        {
+          text: `Является ли размер ваших чистых активов положительным? Напишите да или нет?`
+        }
+      ],
       on: {
         'to bad final O': {
-          target: 'bad final O'
+          target: 'bad final O',
+          label: 'Да'
         },
         'final O': {
-          target: 'good final'
+          target: 'good final',
+          label: 'Нет'
         }
       }
     },

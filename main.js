@@ -41,7 +41,9 @@ class MessageWidget {
   }
 
   createWidgetContent() {
-    this.widgetContainer.innerHTML = widget.replace('<template>', '').replace('</template>', '')
+    this.widgetContainer.innerHTML = widget
+      .replace('<template>', '')
+      .replace('</template>', '')
   }
 
   injectStyles() {
@@ -69,11 +71,46 @@ class MessageWidget {
         toggleOpen() {
           this.open = !this.open
         },
-        nextQuest(id) {
+        saveAnswer(id, answer) {
+          this.history[this.history.length - 1].answer = answer
+          this.nextQuest(id, answer)
+        },
+        editAnswer(ind) {
+          let newHistory = []
+          for(let i = 0; i <= ind; i++) {
+            if(i == ind) {
+              this.history[i].answer = null
+            }
+            newHistory.push(this.history[i])
+          }
+          this.history = newHistory
+        },
+        nextQuest(id, answer) {
           this.history.push({
             id,
             answer: null
           })
+        },
+        reset() {
+          this.history = [
+            {
+              id: 'idle',
+              answer: null
+            }
+          ]
+        }
+      },
+      watch: {
+        history: {
+          handler: function () {
+            setTimeout(() => {
+              this.$refs.msg_chat.scrollTo({
+                top: this.$refs.msg_chat.scrollHeight,
+                behavior: 'smooth'
+              })
+            })
+          },
+          deep: true
         }
       }
     }).mount('#quiz_widget')
