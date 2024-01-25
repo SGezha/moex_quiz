@@ -208,6 +208,24 @@ export const data = {
         }
       }
     },
-    'good final': {}
+    'good final': {
+      author: 'MOEX',
+      messages: [
+        {
+          if: 'больше 3 лет ',
+          text: `Общались ли в с банками-организаторами?`
+        }
+      ],
+      on: {
+        'final A': {
+          target: 'good final',
+          label: 'Да'
+        },
+        'final A_2': {
+          target: 'good final',
+          label: 'Нет'
+        }
+      }
+    }
   }
 }
