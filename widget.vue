@@ -54,9 +54,14 @@
                   <div
                     v-for="msg in data.states[state.id].messages"
                     :key="msg"
-                    v-html="msg.text"
-                    class="msg"
-                  ></div>
+                    class="msg message"
+                  >
+                    <p v-html="msg.text"></p>
+                    <a v-for="btn in msg.btn" :href="btn.url" :target="btn.target" class="msg_btn">
+                      {{ btn.label }}
+                    </a>
+                  </div>
+                  
                 </div>
                 <div v-if="state.answer" class="message_answer">
                   <label>Вы ответили:</label>
@@ -77,6 +82,9 @@
                     </button>
                   </div>
                 </div>
+              </div>
+              <div v-if="isTyping" class="msg_typing">
+                <div class="loader"></div>
               </div>
             </div>
           </div>

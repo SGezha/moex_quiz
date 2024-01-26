@@ -149,7 +149,31 @@ export const data = {
         }
       }
     },
-    'bad final O': {},
+    'bad final O': {
+      author: 'MOEX',
+      messages: [
+        {
+          text: `Вашей компании есть, куда расти. Инструменты публичного финансирования пока не подходят вашей компании.`,
+          btn: [
+            {
+              label: 'Cсылка на IPO и Bond гид',
+              url: '',
+              target: ''
+            }
+          ]
+        }
+      ],
+      on: {
+        'to idle': {
+          target: 'idle',
+          label: 'Да, продолжаем'
+        },
+        'to end': {
+          target: 'idle',
+          label: 'Нет'
+        }
+      }
+    },
     A_3: {
       author: 'MOEX',
       messages: [

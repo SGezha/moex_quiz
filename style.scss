@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'Favorit Pro';
-  // src: url('https://expages.bubbledouble.ru/assets/Favorit_pro_moex.woff2');
-  src: url('/Favorit_pro_moex.woff2');
+  src: url('https://expages.bubbledouble.ru/assets/Favorit_pro_moex.woff2');
+  // src: url('/Favorit_pro_moex.woff2');
   font-weight: 400;
   font-display: swap;
 }
@@ -338,10 +338,7 @@
   padding: 20px;
   overflow-y: auto;
   height: 100%;
-
-  & > :first-child {
-    margin-top: auto !important;
-  }
+  justify-content: flex-end;
 
   &::-webkit-scrollbar {
     display: none;
@@ -362,6 +359,11 @@
   gap: 4px;
   flex-direction: column;
   max-width: 280px;
+  transition: 0.5s ease-in-out;
+
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+  transform-origin: left;
 
   .msg {
     border-radius: 0px 24px 24px 24px;
@@ -369,6 +371,22 @@
     white-space-collapse: preserve-breaks;
     background: var(--main-black-200);
     padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    // max-height: 0;
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+    // max-height: 200px;
+    opacity: 1;
   }
 }
 
@@ -408,8 +426,30 @@
     gap: 10px;
     border-radius: 24px;
     color: white;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
     background: var(--moex-red, #ff0508);
   }
+}
+
+.msg_btn {
+  border-radius: 8px;
+  background: var(--main-black-900);
+  width: 100%;
+  padding: 12px;
+  text-align: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  color: white;
+  text-decoration: none;
+  position: relative;
 }
 
 .bg {
@@ -473,6 +513,43 @@
   }
 }
 
+.msg_typing {
+  margin-bottom: 16px;
+  .loader {
+    width: 60px; /* control the size */
+    aspect-ratio: 8/5;
+    --_g: no-repeat radial-gradient(var(--main-black-300) 68%, #D1D2D500 71%);
+    -webkit-mask: var(--_g), var(--_g), var(--_g);
+    -webkit-mask-size: 25% 40%;
+    background: var(--main-black-300);
+    animation: load 2s infinite;
+  }
+
+  @keyframes load {
+    0% {
+      -webkit-mask-position: 0% 0%, 50% 0%, 100% 0%;
+    }
+    16.67% {
+      -webkit-mask-position: 0% 100%, 50% 0%, 100% 0%;
+    }
+    33.33% {
+      -webkit-mask-position: 0% 100%, 50% 100%, 100% 0%;
+    }
+    50% {
+      -webkit-mask-position: 0% 100%, 50% 100%, 100% 100%;
+    }
+    66.67% {
+      -webkit-mask-position: 0% 0%, 50% 100%, 100% 100%;
+    }
+    83.33% {
+      -webkit-mask-position: 0% 0%, 50% 0%, 100% 100%;
+    }
+    100% {
+      -webkit-mask-position: 0% 0%, 50% 0%, 100% 0%;
+    }
+  }
+}
+
 .message_answer {
   margin-top: 24px;
   color: var(--Main-Black-600, #8c8d8f);
@@ -481,6 +558,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+  transform-origin: right;
 
   label {
     font-size: 16px;

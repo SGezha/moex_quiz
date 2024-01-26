@@ -4,6 +4,10 @@ import { createApp } from './vue.js'
 import widget from './widget.vue?raw'
 import styles from './style.css?raw'
 
+const timeout = (ms) => {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
 class MessageWidget {
   constructor(position = 'bottom-right') {
     // this.position = this.getPosition(position)
@@ -60,6 +64,7 @@ class MessageWidget {
         return {
           open: false,
           isChat: false,
+          isTyping: false,
           stories: [
             {
               id: 0,
@@ -69,7 +74,7 @@ class MessageWidget {
               textColor: 'white',
               media: './test_bg.jpg',
               prog: 0,
-              time: 3000,
+              time: 5000,
               watched: false
             },
             {
@@ -79,7 +84,7 @@ class MessageWidget {
               textColor: 'white',
               media: './test_bg.jpg',
               prog: 0,
-              time: 3000,
+              time: 5000,
               watched: false
             }
           ],
@@ -101,8 +106,11 @@ class MessageWidget {
         toggleOpen() {
           this.open = !this.open
         },
-        saveAnswer(id, answer) {
+        async saveAnswer(id, answer) {
           this.history[this.history.length - 1].answer = answer
+          this.isTyping = true
+          await timeout(1000)
+          this.isTyping = false
           this.nextQuest(id, answer)
         },
         editAnswer(ind) {
@@ -138,6 +146,7 @@ class MessageWidget {
               this.stories[this.currentStory.id].time
             )
           } else {
+            this.isChat = true
             // this.resetStories()
           }
         },
@@ -148,13 +157,17 @@ class MessageWidget {
             el.style = `--progress: 0%`
           }
           setTimeout(() => {
-            this.startAnim(document.querySelector(`.st_line_0`), this.stories[this.currentStory.id].time)
+            this.startAnim(
+              document.querySelector(`.st_line_0`),
+              this.stories[this.currentStory.id].time
+            )
           }, 100)
         },
         startAnim(el, time) {
           const zero = performance.now()
           const animate = (id) => {
             const value = (performance.now() - zero) / time
+            if (!el) return
             if (value < 1) {
               el.style = `--progress: ${value * 100}%`
               requestAnimationFrame((t) => animate(t))
@@ -181,13 +194,12 @@ class MessageWidget {
           }
         },
         history: {
-          handler: function () {
-            setTimeout(() => {
-              this.$refs.msg_chat.scrollTo({
-                top: this.$refs.msg_chat.scrollHeight,
-                behavior: 'smooth'
-              })
-            })
+          handler: async function () {
+            // await timeout(1000)
+            // this.$refs.msg_chat.scrollTo({
+            //   top: this.$refs.msg_chat.scrollHeight,
+            //   behavior: 'smooth'
+            // })
           },
           deep: true
         }
