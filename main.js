@@ -8,6 +8,10 @@ const timeout = (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
+const getRandomInt = (min, max) => {
+  return Math.random() * (max - min) + min;
+}
+
 class MessageWidget {
   constructor(position = 'bottom-right') {
     // this.position = this.getPosition(position)
@@ -88,18 +92,25 @@ class MessageWidget {
               watched: false
             }
           ],
+          answer: {
+            show: false,
+            on: []
+          },
+          isBg: false,
           currentStory: {
             id: 0,
             prog: 0,
             active: 0
           },
+          showChat: false,
           data: data,
           history: [
             {
               id: 'idle',
               answer: null
             }
-          ]
+          ],
+          curBotMargin: 0,
         }
       },
       methods: {
@@ -107,9 +118,10 @@ class MessageWidget {
           this.open = !this.open
         },
         async saveAnswer(id, answer) {
+          this.answer.show = false
           this.history[this.history.length - 1].answer = answer
           this.isTyping = true
-          await timeout(1000)
+          await timeout(getRandomInt(1000, 1500))
           this.isTyping = false
           this.nextQuest(id, answer)
         },
@@ -128,6 +140,8 @@ class MessageWidget {
             id,
             answer: null
           })
+          this.answer.on = this.data.states[this.history[this.history.length - 1].id].on
+          this.answer.show = true
         },
         reset() {
           this.history = [
@@ -181,6 +195,32 @@ class MessageWidget {
       },
       mounted() {},
       watch: {
+        isChat: {
+          handler: async function (value) {
+            if (value) {
+              this.answer.on = this.data.states[this.history[this.history.length - 1].id].on
+              await timeout(500)
+              this.isBg = true
+              this.answer.show = true
+              this.showChat = true
+            }
+          }
+        },
+        answer: {
+          handler: async function (value) {
+            if (value.show) {
+              await timeout(100)
+              this.curBotMargin = `${document.querySelector('.message_actions').clientHeight + 24}px`
+              await timeout(10)
+              this.$refs.msg_chat.scrollTo({
+                top: this.$refs.msg_chat.scrollHeight
+              })
+            } else {
+              this.curBotMargin = 0
+            }
+          },
+          deep: true
+        },
         open: {
           handler: function (value) {
             if (value) {
@@ -195,11 +235,6 @@ class MessageWidget {
         },
         history: {
           handler: async function () {
-            // await timeout(1000)
-            // this.$refs.msg_chat.scrollTo({
-            //   top: this.$refs.msg_chat.scrollHeight,
-            //   behavior: 'smooth'
-            // })
           },
           deep: true
         }
