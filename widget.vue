@@ -51,18 +51,28 @@
                     </svg>
                   </button>
                 </div>
-                <div ref="msg_chat" class="message__container" :style="`--bot_mar: ${curBotMargin};`">
+                <div
+                  ref="msg_chat"
+                  class="message__container"
+                  :style="`--bot_mar: ${curBotMargin};`"
+                >
                   <div v-for="(state, ind) in history" class="msg_list">
                     <div class="message__author">
                       {{ data.states[state.id].author }}
                     </div>
                     <div class="messages__block">
+                      <div v-if="state.isTyping" class="msg_typing">
+                        <div class="typing">
+                          <div class="typing__dot"></div>
+                          <div class="typing__dot"></div>
+                          <div class="typing__dot"></div>
+                        </div>
+                      </div>
                       <div
+                        v-else
                         v-for="(msg, ind) in data.states[state.id].messages"
                         :key="msg"
-                        :style="`--delay: ${
-                          5000 * ind
-                        }s; animation: fadeIn 0.5s ease-in-out forwards;`"
+                        :style="`--delay: ${1000 * ind}ms;`"
                         class="msg message"
                       >
                         <p v-html="msg.text"></p>
@@ -73,11 +83,34 @@
                           class="msg_btn"
                         >
                           {{ btn.label }}
+
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="25"
+                            height="24"
+                            viewBox="0 0 25 24"
+                            fill="none"
+                          >
+                            <path
+                              d="M7.5 17L17.5 7"
+                              stroke="white"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                            <path
+                              d="M7.5 7H17.5V17"
+                              stroke="white"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
                         </a>
                       </div>
                     </div>
                     <div v-if="state.answer" class="message_answer">
-                      <label>Вы ответили:</label>
+                      <label>Ваш ответ</label>
                       <div v-html="state.answer" class="msg"></div>
                       <!-- <button @click="editAnswer(ind)">
                       Изменить вариант ответа
@@ -93,24 +126,24 @@
                   </div>
                 </div>
                 <Transition name="answer_btn">
-                    <div
-                      v-if="answer.show"
-                      :class="`${answer.show ? 'show' : ''}`"
-                      class="message_actions"
-                      ref="message_actions"
-                    >
-                      <!-- <label>Выберите ответ:</label> -->
-                      <div class="btn_container">
-                        <button
-                          @click="saveAnswer(value.target, value.label)"
-                          v-for="value in answer.on"
-                          :key="value.label"
-                        >
-                          {{ value.label }}
-                        </button>
-                      </div>
+                  <div
+                    v-if="answer.show"
+                    :class="`${answer.show ? 'show' : ''}`"
+                    class="message_actions"
+                    ref="message_actions"
+                  >
+                    <!-- <label>Выберите ответ:</label> -->
+                    <div class="btn_container">
+                      <button
+                        @click="saveAnswer(value.target, value.label)"
+                        v-for="value in answer.on"
+                        :key="value.label"
+                      >
+                        {{ value.label }}
+                      </button>
                     </div>
-                  </Transition>
+                  </div>
+                </Transition>
               </div>
               <div v-else class="chat_start">
                 <svg
@@ -173,9 +206,9 @@
                 />
               </div>
             </transition-group>
-            <button @click="isChat = true" class="btn start_btn">
-              Пройти тест
-            </button>
+            <div class="start_btn">
+              <button @click="isChat = true" class="btn">Пройти тест</button>
+            </div>
           </div>
         </Transition>
       </div>

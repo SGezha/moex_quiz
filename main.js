@@ -4,12 +4,14 @@ import { createApp } from './vue.js'
 import widget from './widget.vue?raw'
 import styles from './style.css?raw'
 
+const DELAYINMS = 500
+
 const timeout = (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
 const getRandomInt = (min, max) => {
-  return Math.random() * (max - min) + min;
+  return Math.random() * (max - min) + min
 }
 
 class MessageWidget {
@@ -102,31 +104,36 @@ class MessageWidget {
             prog: 0,
             active: 0
           },
+          isLock: false,
           showChat: false,
           data: data,
-          history: [
-            {
-              id: 'idle',
-              answer: null
-            }
-          ],
-          curBotMargin: 0,
+          isStoriesPause: false,
+          history: [],
+          curBotMargin: 0
         }
       },
       methods: {
         toggleOpen() {
+          if(this.isLock) return
           this.open = !this.open
         },
         async saveAnswer(id, answer) {
           this.answer.show = false
           this.history[this.history.length - 1].answer = answer
           this.isTyping = true
+          await timeout(1)
+          this.scrollToBot('smooth')
           await timeout(getRandomInt(1000, 1500))
           this.isTyping = false
-          this.nextQuest(id, answer)
+          this.nextQuest(
+            id,
+            answer,
+            this.history[this.history.length - 1].messages
+          )
         },
         editAnswer(ind) {
           let newHistory = []
+          this.answer.show = false
           for (let i = 0; i <= ind; i++) {
             if (i == ind) {
               this.history[i].answer = null
@@ -134,22 +141,36 @@ class MessageWidget {
             newHistory.push(this.history[i])
           }
           this.history = newHistory
-        },
-        nextQuest(id, answer) {
-          this.history.push({
-            id,
-            answer: null
-          })
-          this.answer.on = this.data.states[this.history[this.history.length - 1].id].on
+          this.answer.on =
+            this.data.states[this.history[this.history.length - 1].id].on
           this.answer.show = true
         },
-        reset() {
+        nextQuest(id, answer, messages) {
+          this.history.push({ id, answer: null, messages, isTyping: false })
+          const lastId = this.history[this.history.length - 1].id
+          this.answer.on = this.data.states[lastId].on
+          this.answer.show = true
+        },
+        async reset() {
+          this.isBg = false
+          this.showChat = false
+          this.answer.show = false
+          await timeout(500)
           this.history = [
             {
               id: 'idle',
               answer: null
             }
           ]
+          this.answer.on =
+            this.data.states[this.history[this.history.length - 1].id].on
+          await timeout(500)
+          this.isBg = true
+          this.showChat = true
+          await timeout(1)
+          this.scrollToBot()
+          await timeout(1500)
+          this.answer.show = true
         },
         nextStories() {
           this.stories[this.currentStory.id].watched = true
@@ -177,6 +198,12 @@ class MessageWidget {
             )
           }, 100)
         },
+        scrollToBot(behavior = 'instant') {
+          this.$refs.msg_chat?.scrollTo({
+            top: this.$refs.msg_chat.scrollHeight,
+            behavior
+          })
+        },
         startAnim(el, time) {
           const zero = performance.now()
           const animate = (id) => {
@@ -195,14 +222,27 @@ class MessageWidget {
       },
       mounted() {},
       watch: {
+        isStoriesPause: {
+          handler: async function (value) {}
+        },
         isChat: {
           handler: async function (value) {
             if (value) {
-              this.answer.on = this.data.states[this.history[this.history.length - 1].id].on
+              this.answer.show = false
               await timeout(500)
+              this.history.push({
+                id: 'idle',
+                answer: null,
+                isTyping: false
+              })
+              this.answer.on =
+                this.data.states[this.history[this.history.length - 1].id].on
               this.isBg = true
-              this.answer.show = true
               this.showChat = true
+              this.history[this.history.length - 1].isTyping = true
+              await timeout(1500)
+              this.history[this.history.length - 1].isTyping = false
+              this.answer.show = true
             }
           }
         },
@@ -210,31 +250,36 @@ class MessageWidget {
           handler: async function (value) {
             if (value.show) {
               await timeout(100)
-              this.curBotMargin = `${document.querySelector('.message_actions').clientHeight + 24}px`
-              await timeout(10)
-              this.$refs.msg_chat.scrollTo({
-                top: this.$refs.msg_chat.scrollHeight
-              })
+              this.curBotMargin = `${
+                document.querySelector('.message_actions')?.clientHeight + 24
+              }px`
+              await timeout(1)
+              this.scrollToBot()
             } else {
-              this.curBotMargin = 0
+              this.curBotMargin = '24px'
             }
           },
           deep: true
         },
         open: {
-          handler: function (value) {
+          handler: async function (value) {
             if (value) {
-              setTimeout(() => {
+              setTimeout(async () => {
                 this.startAnim(
                   document.querySelector(`.st_line_${this.currentStory.id}`),
                   this.stories[this.currentStory.id].time
                 )
               }, 100)
+              await timeout(1)
+              this.scrollToBot()
             }
           }
         },
         history: {
           handler: async function () {
+            this.isLock = true
+            await timeout(1500)
+            this.isLock = false
           },
           deep: true
         }
