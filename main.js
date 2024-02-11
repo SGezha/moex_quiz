@@ -96,7 +96,9 @@ class MessageWidget {
           ],
           answer: {
             show: false,
-            on: []
+            on: [],
+            type: 'btn',
+            input: ''
           },
           isBg: false,
           currentStory: {
@@ -109,13 +111,25 @@ class MessageWidget {
           data: data,
           isStoriesPause: false,
           history: [],
-          curBotMargin: 0
+          curBotMargin: 0,
+          noAnimation: false,
+          firstOpen: true,
+          isPause: false,
+          animId: 0
         }
       },
       methods: {
-        toggleOpen() {
-          if(this.isLock) return
+        async toggleOpen() {
+          if (this.isLock) return
           this.open = !this.open
+          if (!this.firstOpen) {
+            this.noAnimation = true
+            await timeout(1)
+            this.noAnimation = false
+          }
+          if (this.open) {
+            this.firstOpen = false
+          }
         },
         async saveAnswer(id, answer) {
           this.answer.show = false
@@ -145,17 +159,22 @@ class MessageWidget {
             this.data.states[this.history[this.history.length - 1].id].on
           this.answer.show = true
         },
-        nextQuest(id, answer, messages) {
+        async nextQuest(id, answer, messages) {
           this.history.push({ id, answer: null, messages, isTyping: false })
           const lastId = this.history[this.history.length - 1].id
           this.answer.on = this.data.states[lastId].on
+          for (let btn in this.answer.on) {
+            this.answer.type = this.answer.on[btn].type
+          }
+          // await timeout(1500 * Object.keys(this.answer.on).length)
           this.answer.show = true
         },
         async reset() {
+          if (this.isLock) return
           this.isBg = false
           this.showChat = false
           this.answer.show = false
-          await timeout(500)
+          await timeout(DELAYINMS)
           this.history = [
             {
               id: 'idle',
@@ -164,7 +183,8 @@ class MessageWidget {
           ]
           this.answer.on =
             this.data.states[this.history[this.history.length - 1].id].on
-          await timeout(500)
+          this.answer.type = 'btn'
+          await timeout(DELAYINMS)
           this.isBg = true
           this.showChat = true
           await timeout(1)
@@ -172,31 +192,45 @@ class MessageWidget {
           await timeout(1500)
           this.answer.show = true
         },
+        prevStories() {
+          this.currentStory.id = 0
+          this.stories[this.currentStory.id].watched = false
+          for (let i = 0; i < this.stories.length; i++) {
+            let el = document.querySelector(`.st_line_${i}`)
+            el.style = `--progress: 0%`
+          }
+          this.startAnim(
+            document.querySelector(`.st_line_${this.currentStory.id}`),
+            this.stories[this.currentStory.id].time,
+            this.currentStory.id
+          )
+        },
         nextStories() {
           this.stories[this.currentStory.id].watched = true
           if (this.stories[this.currentStory.id + 1]) {
             this.currentStory.id++
             this.startAnim(
               document.querySelector(`.st_line_${this.currentStory.id}`),
-              this.stories[this.currentStory.id].time
+              this.stories[this.currentStory.id].time,
+              this.currentStory.id
             )
           } else {
             this.isChat = true
             // this.resetStories()
           }
         },
-        resetStories() {
+        async resetStories() {
           this.currentStory.id = 0
           for (let i = 0; i < this.stories.length; i++) {
             let el = document.querySelector(`.st_line_${i}`)
             el.style = `--progress: 0%`
           }
-          setTimeout(() => {
-            this.startAnim(
-              document.querySelector(`.st_line_0`),
-              this.stories[this.currentStory.id].time
-            )
-          }, 100)
+          await timeout(10)
+          this.startAnim(
+            document.querySelector(`.st_line_0`),
+            this.stories[this.currentStory.id].time,
+            this.currentStory.id
+          )
         },
         scrollToBot(behavior = 'instant') {
           this.$refs.msg_chat?.scrollTo({
@@ -204,20 +238,34 @@ class MessageWidget {
             behavior
           })
         },
-        startAnim(el, time) {
-          const zero = performance.now()
-          const animate = (id) => {
-            const value = (performance.now() - zero) / time
-            if (!el) return
-            if (value < 1) {
-              el.style = `--progress: ${value * 100}%`
-              requestAnimationFrame((t) => animate(t))
-            } else {
-              el.style = `--progress: 100%`
-              this.nextStories()
-            }
-          }
-          requestAnimationFrame(animate)
+        startAnim(el, time, ind) {
+          // const zero = performance.now()
+          // let startTime = zero
+          // const animate = () => {
+          //   const value = (performance.now() - zero) / time
+          //   if (!el) return
+          //   const { watched, id } = this.stories[ind]
+          //   if (this.isPause) {
+          //     startTime = performance.now()
+          //     cancelAnimationFrame(this.animId)
+          //     return requestAnimationFrame(animate)
+          //   }
+          //   if (value < 1 && !watched && this.currentStory.id >= ind) {
+          //     el.style.setProperty('--progress', `${value * 100}%`)
+          //     requestAnimationFrame(animate)
+          //   } else if (watched) {
+          //     el.style.setProperty('--progress', '100%')
+          //   } else if (this.currentStory.id < ind) {
+          //     el.style.setProperty('--progress', '0%')
+          //   } else {
+          //     this.nextStories()
+          //   }
+          // }
+          // this.animId = requestAnimationFrame(animate)
+        },
+        togglePause() {
+          console.log(this.isPause)
+          this.isPause = !this.isPause
         }
       },
       mounted() {},
@@ -229,7 +277,7 @@ class MessageWidget {
           handler: async function (value) {
             if (value) {
               this.answer.show = false
-              await timeout(500)
+              await timeout(DELAYINMS)
               this.history.push({
                 id: 'idle',
                 answer: null,
@@ -267,7 +315,8 @@ class MessageWidget {
               setTimeout(async () => {
                 this.startAnim(
                   document.querySelector(`.st_line_${this.currentStory.id}`),
-                  this.stories[this.currentStory.id].time
+                  this.stories[this.currentStory.id].time,
+                  this.currentStory.id
                 )
               }, 100)
               await timeout(1)

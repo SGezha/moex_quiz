@@ -15,11 +15,13 @@ export const data = {
       on: {
         'to A_1': {
           target: 'A_1',
-          label: 'Акции'
+          label: 'Акции',
+          type: 'btn'
         },
         'to O_1': {
           target: 'O_1',
-          label: 'Облигации'
+          label: 'Облигации',
+          type: 'btn'
         }
       }
     },
@@ -33,15 +35,18 @@ export const data = {
       on: {
         'to A_2_1': {
           target: 'A_2',
-          label: 'меньше 1 млрд'
+          label: 'меньше 1 млрд',
+          type: 'btn'
         },
         'to A_2_2': {
           target: 'A_2',
-          label: 'от 1 млрд до 10 млрд'
+          label: 'от 1 млрд до 10 млрд',
+          type: 'btn'
         },
         'to A_2_3': {
           target: 'A_2',
-          label: 'больше 10 млрд'
+          label: 'больше 10 млрд',
+          type: 'btn'
         }
       }
     },
@@ -55,15 +60,18 @@ export const data = {
       on: {
         'to bad final O': {
           target: 'bad final O',
-          label: 'меньше 120 млн'
+          label: 'меньше 120 млн',
+          type: 'btn'
         },
         'to O_2_1': {
           target: 'O_2',
-          label: 'от 120 млн до 1 млрд'
+          label: 'от 120 млн до 1 млрд',
+          type: 'btn'
         },
         'to O_2_2': {
           target: 'O_2',
-          label: 'больше 1 млрд.'
+          label: 'больше 1 млрд.',
+          type: 'btn'
         }
       }
     },
@@ -77,15 +85,18 @@ export const data = {
       on: {
         'to A_3_1': {
           target: 'A_3',
-          label: 'меньше 500 млн'
+          label: 'меньше 500 млн',
+          type: 'btn'
         },
         'to A_3_2': {
           target: 'A_3',
-          label: 'от 500 млн до 5 млрд'
+          label: 'от 500 млн до 5 млрд',
+          type: 'btn'
         },
         'to A_3_3': {
           target: 'A_3',
-          label: 'больше 5 млрд.'
+          label: 'больше 5 млрд.',
+          type: 'btn'
         }
       }
     },
@@ -99,11 +110,13 @@ export const data = {
       on: {
         'to bad final O': {
           target: 'bad final O',
-          label: 'меньше 3 лет'
+          label: 'меньше 3 лет',
+          type: 'btn'
         },
         'to O_3': {
           target: 'O_3',
-          label: 'больше 3 лет'
+          label: 'больше 3 лет',
+          type: 'btn'
         }
       }
     },
@@ -115,6 +128,7 @@ export const data = {
           btn: [
             {
               label: 'Cсылка на IPO и Bond гид',
+              type: 'btn',
               url: '',
               target: ''
             }
@@ -124,11 +138,13 @@ export const data = {
       on: {
         'to idle': {
           target: 'idle',
-          label: 'Да, продолжаем'
+          label: 'Да, продолжаем',
+          type: 'btn'
         },
         'to end': {
           target: 'idle',
-          label: 'Нет'
+          label: 'Нет',
+          type: 'btn'
         }
       }
     },
@@ -142,15 +158,18 @@ export const data = {
       on: {
         'to A_4_1': {
           target: 'A_4',
-          label: 'меньше 1 года'
+          label: 'меньше 1 года',
+          type: 'btn'
         },
         'to A_4_2': {
           target: 'A_4',
-          label: 'больше 1 года, но меньше 3 лет'
+          label: 'больше 1 года, но меньше 3 лет',
+          type: 'btn'
         },
         'to A_4_3': {
           target: 'A_4',
-          label: 'больше 3 лет'
+          label: 'больше 3 лет',
+          type: 'btn'
         }
       }
     },
@@ -164,11 +183,13 @@ export const data = {
       on: {
         'to bad final O': {
           target: 'bad final O',
-          label: 'Да'
+          label: 'Да',
+          type: 'btn'
         },
         'final O': {
           target: 'good final',
-          label: 'Нет'
+          label: 'Нет',
+          type: 'btn'
         }
       }
     },
@@ -182,11 +203,13 @@ export const data = {
       on: {
         'final A': {
           target: 'good final',
-          label: 'Да'
+          label: 'Да',
+          type: 'btn'
         },
         'final A_2': {
           target: 'good final',
-          label: 'Нет'
+          label: 'Нет',
+          type: 'btn'
         }
       }
     },
@@ -195,17 +218,17 @@ export const data = {
       messages: [
         {
           if: 'больше 3 лет ',
-          text: `Общались ли в с банками-организаторами?`
+          text: `Запрашиваем данные для направления документов Deal Review`
+        },
+        {
+          text: 'Название вашей компании?'
         }
       ],
       on: {
-        'final A': {
+        'form_comp': {
           target: 'good final',
-          label: 'Да'
-        },
-        'final A_2': {
-          target: 'good final',
-          label: 'Нет'
+          label: 'Введите название компании',
+          type: 'input'
         }
       }
     }

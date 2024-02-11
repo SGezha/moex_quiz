@@ -1,17 +1,17 @@
 <template>
-  <div id="quiz_widget">
+  <div onclick ontouchmove id="quiz_widget">
     <Transition name="chat">
       <div
         v-if="open"
-        class="widget__container"
+        class="widget_container"
         :style="`--bg: ${isBg ? 'white' : '#13161c'}`"
       >
         <Transition name="slide">
           <div v-if="isChat" class="chat_start">
             <Transition name="fade">
               <div v-if="showChat" class="chat_start">
-                <div class="top__actions">
-                  <button @click="reset()" class="top__actions_reset">
+                <div class="top_actions">
+                  <button @click="reset()" class="top_actions_reset">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -26,7 +26,7 @@
                     </svg>
                     Начать тест заново
                   </button>
-                  <button @click="toggleOpen()" class="top__actions_close">
+                  <button @click="toggleOpen()" class="top_actions_close">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -53,19 +53,19 @@
                 </div>
                 <div
                   ref="msg_chat"
-                  class="message__container"
+                  class="message_container"
                   :style="`--bot_mar: ${curBotMargin};`"
                 >
                   <div v-for="(state, ind) in history" class="msg_list">
-                    <div class="message__author">
+                    <div class="message_author">
                       {{ data.states[state.id].author }}
                     </div>
-                    <div class="messages__block">
+                    <div class="messages_block">
                       <div v-if="state.isTyping" class="msg_typing">
                         <div class="typing">
-                          <div class="typing__dot"></div>
-                          <div class="typing__dot"></div>
-                          <div class="typing__dot"></div>
+                          <div class="typing_dot"></div>
+                          <div class="typing_dot"></div>
+                          <div class="typing_dot"></div>
                         </div>
                       </div>
                       <div
@@ -73,6 +73,8 @@
                         v-for="(msg, ind) in data.states[state.id].messages"
                         :key="msg"
                         :style="`--delay: ${1000 * ind}ms;`"
+                        :class="`${msg.noAnimations ? 'noAnimation' : ''}`"
+                        @animationend="msg.noAnimations = true"
                         class="msg message"
                       >
                         <p v-html="msg.text"></p>
@@ -111,7 +113,12 @@
                     </div>
                     <div v-if="state.answer" class="message_answer">
                       <label>Ваш ответ</label>
-                      <div v-html="state.answer" class="msg"></div>
+                      <div
+                        v-html="state.answer"
+                        class="msg"
+                        :class="`${state.anim ? 'noAnimation' : ''}`"
+                        @animationend="state.anim = true"
+                      ></div>
                       <!-- <button @click="editAnswer(ind)">
                       Изменить вариант ответа
                     </button> -->
@@ -119,9 +126,9 @@
                   </div>
                   <div v-if="isTyping" class="msg_typing">
                     <div class="typing">
-                      <div class="typing__dot"></div>
-                      <div class="typing__dot"></div>
-                      <div class="typing__dot"></div>
+                      <div class="typing_dot"></div>
+                      <div class="typing_dot"></div>
+                      <div class="typing_dot"></div>
                     </div>
                   </div>
                 </div>
@@ -130,11 +137,44 @@
                     v-if="answer.show"
                     :class="`${answer.show ? 'show' : ''}`"
                     class="message_actions"
+                    :class="`${answer.noAnimations ? 'noAnimation' : ''}`"
+                    @animationend="answer.noAnimations = true"
                     ref="message_actions"
                   >
                     <!-- <label>Выберите ответ:</label> -->
                     <div class="btn_container">
+                      <form
+                        v-if="answer.type == 'input'"
+                        @submit.prevent="
+                          saveAnswer(answer.on[Object.keys(answer.on)[0]].target, answer.input)
+                        "
+                        class="input_form"
+                      >
+                        <input
+                          type="text"
+                          :placeholder="value.label"
+                          v-for="value in answer.on"
+                          v-model="answer.input"
+                          :key="value.label"
+                          :class="`${answer.input.length > 0 ? '' : 'hide'}`"
+                        />
+                        <button class="btn_send" type="submit">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="17"
+                            height="16"
+                            viewBox="0 0 17 16"
+                            fill="none"
+                          >
+                            <path
+                              d="M16.7071 8.70711C17.0976 8.31659 17.0976 7.68343 16.7071 7.2929L10.3431 0.928937C9.95263 0.538413 9.31946 0.538412 8.92894 0.928936C8.53841 1.31946 8.53841 1.95263 8.92893 2.34315L14.5858 8.00001L8.92893 13.6569C8.53841 14.0474 8.53841 14.6805 8.92893 15.0711C9.31945 15.4616 9.95262 15.4616 10.3431 15.0711L16.7071 8.70711ZM-4.80825e-07 9L16 9.00001L16 7.00001L4.80825e-07 7L-4.80825e-07 9Z"
+                              fill="white"
+                            />
+                          </svg>
+                        </button>
+                      </form>
                       <button
+                        v-else
                         @click="saveAnswer(value.target, value.label)"
                         v-for="value in answer.on"
                         :key="value.label"
@@ -174,10 +214,33 @@
           </div>
         </Transition>
         <Transition name="fade">
-          <div v-if="!isChat" class="stories">
+          <div
+            v-if="!isChat"
+            class="stories"
+            @mousedown="togglePause()"
+            @mouseup="togglePause()"
+            @touchstart="togglePause()"
+            @touchend="togglePause()"
+          >
+            <div class="control">
+              <div class="left" @click="prevStories()"></div>
+              <div class="right" @click="nextStories()"></div>
+            </div>
             <div class="st_lines">
-              <div v-for="storie in stories" :key="storie.id" class="line">
-                <div :class="`st_line_${storie.id}`" class="progress"></div>
+              <div
+                v-for="(storie, ind) in stories"
+                :key="storie.id"
+                class="line"
+              >
+                <div
+                  :class="`st_line_${storie.id} ${
+                    storie.id == currentStory.id ? 'active' : ''
+                  } ${storie.watched ? 'watched' : ''} ${
+                    isPause ? 'paused' : ''
+                  }`"
+                  class="progress"
+                  @animationend="nextStories()"
+                ></div>
               </div>
             </div>
             <transition-group name="list">
@@ -203,6 +266,7 @@
                   loading="lazy"
                   :src="storie.media"
                   :alt="storie.desc"
+                  @contextmenu.prevent=""
                 />
               </div>
             </transition-group>
@@ -213,9 +277,9 @@
         </Transition>
       </div>
     </Transition>
-    <button @click="toggleOpen()" class="button__container">
+    <button @click="toggleOpen()" class="button_container">
       <div class="stories_circle">
-        <div class="icon__line"></div>
+        <div class="icon_line"></div>
         <div
           v-for="storie in stories"
           :key="storie.id"
@@ -223,7 +287,7 @@
           class="st_circle"
         ></div>
       </div>
-      <span v-if="!open" class="widget__icon">
+      <span v-if="!open" class="widget_icon">
         <svg
           width="39"
           height="22"
@@ -247,7 +311,7 @@
           />
         </svg>
       </span>
-      <span v-else class="widget__icon">
+      <span v-else class="widget_icon">
         <svg
           width="24"
           height="24"

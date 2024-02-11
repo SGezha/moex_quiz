@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'Favorit Pro';
-  // src: url('https://expages.bubbledouble.ru/assets/Favorit_pro_moex.woff2');
-  src: url('/Favorit_pro_moex.woff2');
+  src: url('https://expages.bubbledouble.ru/assets/Favorit_pro_moex.woff2');
+  // src: url('/Favorit_pro_moex.woff2');
   font-weight: 400;
   font-display: swap;
 }
@@ -17,9 +17,82 @@
   bottom: 16px;
   right: 16px;
 
+  img {
+    user-select: none;
+  }
+
+  button {
+    user-select: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-tap-highlight-color: transparent;
+  }
+
   @media (min-width: 1024px) {
     bottom: 40px;
     right: 100px;
+  }
+}
+
+.control {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+
+  .left,
+  .right {
+    width: 100%;
+    height: 100%;
+  }
+
+  .left {
+    background: transparent;
+    transition: background 0.2s ease-in-out;
+    &:hover {
+      background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.2) 0%,
+        rgba(0, 0, 0, 0.1) 35%,
+        rgba(0, 0, 0, 0) 60%
+      );
+    }
+
+    &:active {
+      background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.2) 0%,
+        rgba(0, 0, 0, 0.1) 35%,
+        rgba(0, 0, 0, 0) 60%
+      );
+    }
+  }
+
+  .right {
+    background: transparent;
+    transition: background 0.2s ease-in-out;
+    &:hover {
+      background: linear-gradient(
+        270deg,
+        rgba(0, 0, 0, 0.2) 0%,
+        rgba(0, 0, 0, 0.1) 35%,
+        rgba(0, 0, 0, 0) 60%
+      );
+    }
+
+    &:active {
+      background: linear-gradient(
+        270deg,
+        rgba(0, 0, 0, 0.2) 0%,
+        rgba(0, 0, 0, 0.1) 35%,
+        rgba(0, 0, 0, 0) 60%
+      );
+    }
   }
 }
 
@@ -81,9 +154,32 @@
         top: 0;
         background: var(--Main-Black-100, #f4f5f8);
         height: 2px;
-        width: var(--progress);
-        transition: width 0.1s linear;
+        width: 0;
+        animation-play-state: paused;
+
+        &.active {
+          animation: line 2s linear forwards;
+          animation-play-state: running;
+        }
+
+        &.paused {
+          animation-play-state: paused;
+        }
+
+        &.watched {
+          width: 100%;
+        }
       }
+    }
+  }
+
+  @keyframes line {
+    from {
+      width: 0;
+    }
+
+    to {
+      width: 100%;
     }
   }
 
@@ -224,7 +320,7 @@
   transform: translateX(100%);
 }
 
-.button__container {
+.button_container {
   border: none;
   width: 74px;
   height: 74px;
@@ -238,14 +334,14 @@
   }
 
   &:hover {
-    .widget__icon {
+    .widget_icon {
       &::after {
         background: var(--main-black-100);
       }
     }
   }
 
-  .widget__icon {
+  .widget_icon {
     cursor: pointer;
     position: absolute;
     height: 100%;
@@ -292,7 +388,7 @@
     }
   }
 
-  .icon__line {
+  .icon_line {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -357,7 +453,7 @@
   }
 }
 
-.widget__container {
+.widget_container {
   background: var(--bg);
   border-radius: 24px;
   box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.2);
@@ -402,7 +498,7 @@
   }
 }
 
-.message__container {
+.message_container {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -426,7 +522,7 @@
   scrollbar-width: none; /* Firefox */
 }
 
-.messages__block {
+.messages_block {
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -457,6 +553,12 @@
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
     animation-delay: var(--delay);
+
+    &.noAnimation {
+      transition: none;
+      opacity: 1;
+      animation: unset;
+    }
   }
 }
 
@@ -501,6 +603,43 @@
     color: var(--Main-Black-600, #8c8d8f);
   }
 
+  .input_form {
+    display: grid;
+    grid-template-columns: auto 48px;
+    gap: 8px;
+    width: 100%;
+    transition: 0.2s ease-in-out;
+    
+    &:has(input.hide) {
+      grid-template-columns: auto 0px;
+      .btn_send {
+        transform: translateX(100px);
+        opacity: 0;
+      }
+    }
+
+    input {
+      outline: none;
+      border: none;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px;
+      color: var(--main-black-900);
+      border-radius: 24px;
+      background: var(--main-black-200, #f4f5f8);
+      padding: 12px 16px;
+      width: 100%;
+      flex-shrink: 0;
+
+      transition: 0.2s ease-in-out;
+
+      &::placeholder {
+        color: var(--main-black-700, #696a6c);
+      }
+    }
+  }
+
   .btn_container {
     display: flex;
     gap: 8px;
@@ -532,6 +671,19 @@
 
     &:active {
       transform: scale(0.95);
+    }
+
+    &.btn_send {
+      transition: 0.2s ease-in-out;
+      opacity: 1;
+      border-radius: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 48px;
+      width: 48px;
+      padding: 0;
+      transform: translateX(0);
     }
   }
 }
@@ -580,7 +732,7 @@
   overflow: hidden;
 }
 
-.message__author {
+.message_author {
   color: var(--main-black-600);
   font-size: 14px;
   font-style: normal;
@@ -599,7 +751,7 @@
   }
 }
 
-.top__actions {
+.top_actions {
   position: absolute;
   top: 0;
   padding: 20px;
@@ -643,7 +795,7 @@
       transform: scale(0.95);
     }
 
-    &.top__actions_close {
+    &.top_actions_close {
       padding: 12px;
       @media (min-width: 768px) {
         display: none;
@@ -666,7 +818,7 @@
     align-items: center;
   }
 
-  .typing__dot {
+  .typing_dot {
     float: left;
     width: 8px;
     height: 8px;
@@ -677,15 +829,15 @@
     animation: loadingFade 1s infinite;
   }
 
-  .typing__dot:nth-child(1) {
+  .typing_dot:nth-child(1) {
     animation-delay: 0s;
   }
 
-  .typing__dot:nth-child(2) {
+  .typing_dot:nth-child(2) {
     animation-delay: 0.2s;
   }
 
-  .typing__dot:nth-child(3) {
+  .typing_dot:nth-child(3) {
     animation-delay: 0.4s;
   }
 
@@ -736,6 +888,12 @@
     animation-duration: 0.5s;
     transform-origin: right;
     animation-timing-function: ease-in-out;
+
+    &.noAnimation {
+      transition: none;
+      opacity: 1;
+      animation: unset;
+    }
   }
 
   button {
