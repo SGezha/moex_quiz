@@ -535,13 +535,13 @@
 
   .msg {
     border-radius: 0px 24px 24px 24px;
-    color: var(--Main-Black-800);
+    color: var(--main-black-800);
     white-space-collapse: preserve-breaks;
-    background: var(--main-black-200);
+    background: var(--main-black-100);
     padding: 12px 20px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 12px;
     opacity: 0;
     transform-origin: left;
     transition: 0.5s ease-in-out;
@@ -551,6 +551,12 @@
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
     animation-delay: var(--delay);
+
+    .msg_step {
+      color: var(--main-black-600);
+      font-size: 14px;
+      line-height: 20px;
+    }
 
     &.noAnimation {
       transition: none;
@@ -594,8 +600,9 @@
   left: 0;
   width: 100%;
   padding: 24px 24px;
+  padding-top: 0;
   overflow: hidden;
-  background: var(--main-black-100);
+  // background: var(--main-black-100);
 
   label {
     color: var(--Main-Black-600, #8c8d8f);
@@ -654,10 +661,10 @@
     gap: 10px;
     border-radius: 24px;
     color: white;
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: 24px;
+    line-height: 20px;
     background: var(--moex-red, #ff0508);
 
     transform: scale(1);
@@ -686,19 +693,26 @@
   }
 }
 
+.msg_btns {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
 .msg_btn {
-  border-radius: 8px;
-  background: var(--main-black-900);
+  border-radius: 32px;
+  background: #388AF7;
   width: 100%;
   padding: 12px;
   text-align: center;
   border: none;
   outline: none;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 20px;
   color: white;
   text-decoration: none;
   position: relative;
@@ -877,7 +891,7 @@
 
   .msg {
     border-radius: 20px 0px 20px 20px;
-    background: var(--Main-Black-300, #d1d2d5);
+    background: var(--main-black-100);
     text-align: center;
     padding: 12px 20px;
     width: 100%;

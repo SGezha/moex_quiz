@@ -75,8 +75,8 @@ class MessageWidget {
             {
               id: 0,
               title:
-                'Выход на публичный рынок является важным решением для каждой компании 1',
-              desc: 'Размещение акций проходит через IPO, а для облигаций существует своя процедура',
+                'Выход на публичный рынок является важным решением для каждой компании',
+              desc: '',
               textColor: 'white',
               media: './test_bg.jpg',
               prog: 0,
@@ -87,7 +87,7 @@ class MessageWidget {
             {
               id: 1,
               title:
-                'Пройдите тест, чтобы узнать какой способ выхода на публичный рынок подходит вашей компании 2',
+                'В зависимости от цели, компании могут выпустить либо акции, либо облигации',
               textColor: 'white',
               media: './test_bg.jpg',
               prog: 0,
@@ -98,7 +98,7 @@ class MessageWidget {
             {
               id: 2,
               title:
-                'Пройдите тест, чтобы узнать какой способ выхода на публичный рынок подходит вашей компании 3',
+                'Пройдите тест, чтобы узнать какой способ выхода на публичный рынок подходит вашей компании',
               textColor: 'white',
               media: './test_bg.jpg',
               prog: 0,
@@ -202,7 +202,7 @@ class MessageWidget {
           this.showChat = true
           await timeout(1)
           this.scrollToBot()
-          await timeout(1500)
+          await timeout(500)
           this.answer.show = true
         },
         prevStories() {
@@ -303,7 +303,7 @@ class MessageWidget {
               this.isBg = true
               this.showChat = true
               this.history[this.history.length - 1].isTyping = true
-              await timeout(1500)
+              await timeout(500)
               this.history[this.history.length - 1].isTyping = false
               this.answer.show = true
             }
@@ -314,12 +314,12 @@ class MessageWidget {
             if (value.show) {
               await timeout(100)
               this.curBotMargin = `${
-                document.querySelector('.message_actions')?.clientHeight + 24
+                document.querySelector('.message_actions')?.clientHeight + 20
               }px`
               await timeout(1)
               this.scrollToBot()
             } else {
-              this.curBotMargin = '24px'
+              this.curBotMargin = '20px'
             }
           },
           deep: true
@@ -342,7 +342,7 @@ class MessageWidget {
         history: {
           handler: async function () {
             this.isLock = true
-            await timeout(1500)
+            await timeout(500)
             this.isLock = false
           },
           deep: true
