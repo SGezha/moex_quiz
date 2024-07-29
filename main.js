@@ -75,23 +75,36 @@ class MessageWidget {
             {
               id: 0,
               title:
-                'Выход на публичный рынок является важным решением для каждой компании',
+                'Выход на публичный рынок является важным решением для каждой компании 1',
               desc: 'Размещение акций проходит через IPO, а для облигаций существует своя процедура',
               textColor: 'white',
               media: './test_bg.jpg',
               prog: 0,
               time: 5000,
-              watched: false
+              watched: false,
+              position: 2
             },
             {
               id: 1,
               title:
-                'Пройдите тест, чтобы узнать какой способ выхода на публичный рынок подходит вашей компании',
+                'Пройдите тест, чтобы узнать какой способ выхода на публичный рынок подходит вашей компании 2',
               textColor: 'white',
               media: './test_bg.jpg',
               prog: 0,
               time: 5000,
-              watched: false
+              watched: false,
+              position: 1
+            },
+            {
+              id: 2,
+              title:
+                'Пройдите тест, чтобы узнать какой способ выхода на публичный рынок подходит вашей компании 3',
+              textColor: 'white',
+              media: './test_bg.jpg',
+              prog: 0,
+              time: 5000,
+              watched: false,
+              position: 0
             }
           ],
           answer: {
@@ -193,9 +206,11 @@ class MessageWidget {
           this.answer.show = true
         },
         prevStories() {
-          this.currentStory.id = 0
-          this.stories[this.currentStory.id].watched = false
+          this.currentStory.id = this.currentStory.id - 1 < 0 ? 0 : this.currentStory.id - 1
           for (let i = 0; i < this.stories.length; i++) {
+            if(i >= this.currentStory.id) {
+              this.stories[i].watched = false
+            }
             let el = document.querySelector(`.st_line_${i}`)
             el.style = `--progress: 0%`
           }

@@ -249,7 +249,7 @@
                 :key="storie.id"
                 :style="`--textColor: ${storie.textColor}; --page: ${
                   storie.id * 100
-                }%; --id: ${storie.id == 1 ? '0' : 1};`"
+                }%; --id: ${storie.position};`"
                 class="stories_element"
                 v-show="!storie.watched"
               >
