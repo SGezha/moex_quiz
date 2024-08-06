@@ -43,7 +43,7 @@
                         <div v-if="data.states[state.id].step" class="msg_step">{{ data.states[state.id].step }}</div>
                         <p v-html="msg.text"></p>
                         <div v-if="msg.btn" class="msg_btns">
-                          <a v-for="btn in msg.btn" :href="btn.url" :target="btn.target" class="msg_btn">
+                          <a v-for="btn in msg.btn" @click="clickLink(btn.label)" :href="btn.url" :target="btn.target" class="msg_btn">
                             {{ btn.label }}
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
                               fill="none">
@@ -148,7 +148,20 @@
     </Transition>
     <button @click="toggleOpen()" class="button_container">
       <div class="stories_circle">
-        <div class="icon_line"></div>
+        <div class="icon_line">
+          <svg width="500" height="500" xmlns="http://www.w3.org/2000/svg">
+            <g>
+              <line stroke="#fff" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_5" y2="231.07273"
+                x2="243.321696" y1="12.499993" x1="243.321696" stroke-width="12" fill="none" />
+              <line stroke="#fff" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_6" y2="404.189513"
+                x2="68.483157" y1="229.40571" x1="245.725963" fill-opacity="null" stroke-opacity="null"
+                stroke-width="12" fill="none" />
+              <line stroke="#fff" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_7" y2="412.548512"
+                x2="425.590067" y1="226.946701" x1="241.627607" fill-opacity="null" stroke-opacity="null"
+                stroke-width="12" fill="none" />
+            </g>
+          </svg>
+        </div>
         <div v-for="storie in stories" :key="storie.id" :class="`${storie.watched ? 'watched' : ''}`" class="st_circle">
         </div>
       </div>

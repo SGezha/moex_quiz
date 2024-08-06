@@ -14,6 +14,37 @@ const getRandomInt = (min, max) => {
   return Math.random() * (max - min) + min
 }
 
+const translit = (word) => {
+  var answer = '';
+  var converter = {
+    'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd',
+    'е': 'e', 'ё': 'e', 'ж': 'zh', 'з': 'z', 'и': 'i',
+    'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n',
+    'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't',
+    'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch',
+    'ш': 'sh', 'щ': 'sch', 'ь': '', 'ы': 'y', 'ъ': '',
+    'э': 'e', 'ю': 'yu', 'я': 'ya',
+
+    'А': 'A', 'Б': 'B', 'В': 'V', 'Г': 'G', 'Д': 'D',
+    'Е': 'E', 'Ё': 'E', 'Ж': 'Zh', 'З': 'Z', 'И': 'I',
+    'Й': 'Y', 'К': 'K', 'Л': 'L', 'М': 'M', 'Н': 'N',
+    'О': 'O', 'П': 'P', 'Р': 'R', 'С': 'S', 'Т': 'T',
+    'У': 'U', 'Ф': 'F', 'Х': 'H', 'Ц': 'C', 'Ч': 'Ch',
+    'Ш': 'Sh', 'Щ': 'Sch', 'Ь': '', 'Ы': 'Y', 'Ъ': '',
+    'Э': 'E', 'Ю': 'Yu', 'Я': 'Ya'
+  };
+
+  for (var i = 0; i < word.length; ++i) {
+    if (converter[word[i]] == undefined) {
+      answer += word[i];
+    } else {
+      answer += converter[word[i]];
+    }
+  }
+
+  return answer;
+}
+
 class MessageWidget {
   constructor(position = 'bottom-right') {
     // this.position = this.getPosition(position)
@@ -133,6 +164,8 @@ class MessageWidget {
       },
       methods: {
         async toggleOpen() {
+          window.dataLayer = window.dataLayer || []
+          dataLayer.push({ 'event': 'data-event', 'eventCategory': 'chat_bot', 'eventAction': 'show_pop_up_chat_bot' })
           if (this.isLock) return
           this.open = !this.open
           if (!this.firstOpen) {
@@ -152,10 +185,35 @@ class MessageWidget {
           this.scrollToBot('smooth')
           await timeout(getRandomInt(1000, 1500))
           this.isTyping = false
+          window.dataLayer = window.dataLayer || []
+          dataLayer.push({ 'event': 'data-event', 'eventCategory': 'chat_bot', 'eventAction': 'answer', eventLabel: id, eventValue: translit(answer) })
           this.nextQuest(
             id,
             answer,
             this.history[this.history.length - 1].messages
+          )
+        },
+        clickLink(link) {
+          window.dataLayer = window.dataLayer || []
+          dataLayer.push({ 'event': 'data-event', 'eventCategory': 'chat_bot', 'eventAction': `click_link_${translit(link)}` })
+          let result = []
+          this.history.forEach((item) => {
+            if (item.answer) {
+              result.push({
+                title: this.data.states[item.id].messages.map((item) => item.text).toString(),
+                id: item.id,
+                answer: item.answer,
+              })
+            }
+          })
+
+          localStorage.setItem(
+            'leads-connection',
+            JSON.stringify({
+              url: location.href,
+              urlTitle: document.title,
+              chatBotData: JSON.stringify(result),
+            })
           )
         },
         editAnswer(ind) {
@@ -208,7 +266,7 @@ class MessageWidget {
         prevStories() {
           this.currentStory.id = this.currentStory.id - 1 < 0 ? 0 : this.currentStory.id - 1
           for (let i = 0; i < this.stories.length; i++) {
-            if(i >= this.currentStory.id) {
+            if (i >= this.currentStory.id) {
               this.stories[i].watched = false
             }
             let el = document.querySelector(`.st_line_${i}`)
@@ -279,14 +337,13 @@ class MessageWidget {
           // this.animId = requestAnimationFrame(animate)
         },
         togglePause() {
-          console.log(this.isPause)
           this.isPause = !this.isPause
         }
       },
-      mounted() {},
+      mounted() { },
       watch: {
         isStoriesPause: {
-          handler: async function (value) {}
+          handler: async function (value) { }
         },
         isChat: {
           handler: async function (value) {
@@ -313,9 +370,8 @@ class MessageWidget {
           handler: async function (value) {
             if (value.show) {
               await timeout(100)
-              this.curBotMargin = `${
-                document.querySelector('.message_actions')?.clientHeight + 20
-              }px`
+              this.curBotMargin = `${document.querySelector('.message_actions')?.clientHeight + 20
+                }px`
               await timeout(1)
               this.scrollToBot()
             } else {
