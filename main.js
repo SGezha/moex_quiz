@@ -183,7 +183,7 @@ class MessageWidget {
           this.isTyping = true
           await timeout(1)
           this.scrollToBot('smooth')
-          await timeout(getRandomInt(1000, 1500))
+          await timeout(getRandomInt(2000, 3000))
           this.isTyping = false
           window.dataLayer = window.dataLayer || []
           dataLayer.push({ 'event': 'data-event', 'eventCategory': 'chat_bot', 'eventAction': 'answer', eventLabel: id, eventValue: translit(answer) })
@@ -360,7 +360,7 @@ class MessageWidget {
               this.isBg = true
               this.showChat = true
               this.history[this.history.length - 1].isTyping = true
-              await timeout(500)
+              await timeout(2000)
               this.history[this.history.length - 1].isTyping = false
               this.answer.show = true
             }
