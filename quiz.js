@@ -3,7 +3,7 @@ export const data = {
   initial: 'idle',
   states: {
     idle: {
-      author: 'MOEX',
+      author: 'Moex',
       messages: [
         {
           text: `Здравствуйте!\n Выход на публичный рынок является важным решением для каждой компании.`
@@ -244,8 +244,8 @@ export const data = {
             {
               label: 'Связаться',
               type: 'btn',
-              url: '',
-              target: ''
+              url: 'https://www.moex.com/ru/lead-connection',
+              target: '_blank'
             }
           ]
         }
@@ -271,8 +271,8 @@ export const data = {
             {
               label: 'Связаться',
               type: 'btn',
-              url: '',
-              target: ''
+              url: 'https://www.moex.com/ru/lead-connection',
+              target: '_blank'
             }
           ]
         }
@@ -290,8 +290,8 @@ export const data = {
             {
               label: 'Связаться',
               type: 'btn',
-              url: '',
-              target: ''
+              url: 'https://www.moex.com/ru/lead-connection',
+              target: '_blank'
             }
           ]
         }

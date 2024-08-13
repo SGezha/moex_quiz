@@ -109,7 +109,7 @@ class MessageWidget {
                 'Выход на публичный рынок является важным решением для каждой компании',
               desc: '',
               textColor: 'white',
-              media: 'https://cdn.glitch.global/ac1185bf-deae-4271-be77-9851a93b5db9/01.jpg?v=1723044888282',
+              media: 'https://www.moex.com/media/moex-quiz/01.webp',
               prog: 0,
               time: 5000,
               watched: false,
@@ -120,7 +120,7 @@ class MessageWidget {
               title:
                 'В зависимости от цели, компании могут выпустить либо акции, либо облигации',
               textColor: 'white',
-              media: 'https://cdn.glitch.global/ac1185bf-deae-4271-be77-9851a93b5db9/02.jpg?v=1723044886334',
+              media: 'https://www.moex.com/media/moex-quiz/02.webp',
               prog: 0,
               time: 5000,
               watched: false,
@@ -131,7 +131,7 @@ class MessageWidget {
               title:
                 'Пройдите тест, чтобы узнать какой способ выхода на публичный рынок подходит вашей компании',
               textColor: 'white',
-              media: 'https://cdn.glitch.global/ac1185bf-deae-4271-be77-9851a93b5db9/03.jpg?v=1723044887303',
+              media: 'https://www.moex.com/media/moex-quiz/03.webp',
               prog: 0,
               time: 5000,
               watched: false,

@@ -1,9 +1,10 @@
 @font-face {
   font-family: 'Favorit Pro';
-  src: url('https://cdn.glitch.global/ac1185bf-deae-4271-be77-9851a93b5db9/Favorit_pro_moex.woff2?v=1722960132625');
-  // src: url('/Favorit_pro_moex.woff2');
+  // src: url('https://cdn.glitch.global/ac1185bf-deae-4271-be77-9851a93b5db9/Favorit_pro_moex.woff2?v=1722960132625');
+  src: url('https://www.moex.com/_nuxt/fonts/FavoritPro-Regular.96d28fe.woff2') format("woff2"),url('https://www.moex.com/_nuxt/fonts/FavoritPro-Regular.26e2a25.woff') format("woff");
   font-weight: 400;
   font-display: swap;
+  font-style: normal;
 }
 
 * {
@@ -16,6 +17,7 @@
   position: fixed;
   bottom: 16px;
   right: 16px;
+  z-index: 999;
 
   img {
     user-select: none;
@@ -201,7 +203,7 @@
       justify-content: space-between;
     }
 
-    h4 {
+    .stories_element_title {
       font-size: 24px;
       font-style: normal;
       font-weight: 400;
