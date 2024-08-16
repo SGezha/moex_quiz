@@ -136,36 +136,24 @@ export const data = {
             {
               label: 'IPO-гид',
               type: 'btn',
-              url: '',
-              target: ''
+              url: 'https://fs.moex.com/f/19351/mosbirzha-ipo-guide2023-rus-book.pdf',
+              target: '_blank'
             },
             {
               label: 'ESG-гид',
               type: 'btn',
-              url: '',
-              target: ''
+              url: 'https://fs.moex.com/f/16010/mosbirzha-esg-rus-book-1012.pdf',
+              target: '_blank'
             },
             {
               label: 'Bond-гид',
               type: 'btn',
-              url: '',
-              target: ''
+              url: 'https://bondguide.moex.com/',
+              target: '_blank'
             }
           ]
         }
       ],
-      on: {
-        'to idle': {
-          target: 'idle',
-          label: 'Да, продолжаем',
-          type: 'btn'
-        },
-        'to end': {
-          target: 'idle',
-          label: 'Нет',
-          type: 'btn'
-        }
-      }
     },
     A_3: {
       author: '',
@@ -244,7 +232,7 @@ export const data = {
             {
               label: 'Связаться',
               type: 'btn',
-              url: 'https://www.moex.com/ru/lead-connection',
+              url: '/ru/lead-connection',
               target: '_blank'
             }
           ]
@@ -271,7 +259,7 @@ export const data = {
             {
               label: 'Связаться',
               type: 'btn',
-              url: 'https://www.moex.com/ru/lead-connection',
+              url: '/ru/lead-connection',
               target: '_blank'
             }
           ]
@@ -290,7 +278,7 @@ export const data = {
             {
               label: 'Связаться',
               type: 'btn',
-              url: 'https://www.moex.com/ru/lead-connection',
+              url: '/ru/lead-connection',
               target: '_blank'
             }
           ]

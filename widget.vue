@@ -129,9 +129,9 @@
               <div v-for="storie in stories" :key="storie.id" :style="`--textColor: ${storie.textColor}; --page: ${storie.id * 100
                 }%; --id: ${storie.position};`" class="stories_element" v-show="!storie.watched">
                 <div class="st_container">
-                  <h4 v-if="storie.title" class="stories_element_title">
+                  <div v-if="storie.title" class="stories_element_title">
                     {{ storie.title }}
-                  </h4>
+                  </div>
                   <p v-if="storie.desc" class="stories_element_title_desc">
                     {{ storie.desc }}
                   </p>
