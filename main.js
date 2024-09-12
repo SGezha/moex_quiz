@@ -231,6 +231,17 @@ class MessageWidget {
           this.answer.show = true
         },
         async nextQuest(id, answer, messages) {
+          let newMessages = this.data.states[id].messages
+          this.data.states[id].messages = []
+          newMessages.forEach((s, ind) => {
+            setTimeout(() => {
+              s.noDelay = true
+              this.data.states[id].messages.push(s)
+              setTimeout(() => {
+                this.scrollToBot('smooth')
+              }, 1)
+            }, ind * 500)
+          })
           this.history.push({ id, answer: null, messages, isTyping: false })
           const lastId = this.history[this.history.length - 1].id
           this.answer.on = this.data.states[lastId].on
@@ -238,7 +249,9 @@ class MessageWidget {
             this.answer.type = this.answer.on[btn].type
           }
           // await timeout(1500 * Object.keys(this.answer.on).length)
-          this.answer.show = true
+          setTimeout(() => {
+            this.answer.show = true
+          }, 500 * newMessages.length - 1)
         },
         async reset() {
           if (this.isLock) return
@@ -398,6 +411,7 @@ class MessageWidget {
         history: {
           handler: async function () {
             this.isLock = true
+            this.scrollToBot('smooth')
             await timeout(500)
             this.isLock = false
           },

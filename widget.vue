@@ -38,7 +38,7 @@
                         </div>
                       </div>
                       <div v-else v-for="(msg, ind) in data.states[state.id].messages" :key="msg"
-                        :style="`--delay: ${500 * ind}ms;`" :class="`${msg.noAnimations ? 'noAnimation' : ''}`"
+                        :style="`--delay: ${msg.noDelay == true ? '0' : (500 * ind)}ms;`" :class="`${msg.noAnimations ? 'noAnimation' : ''}`"
                         @animationend="msg.noAnimations = true" class="msg message">
                         <div v-if="data.states[state.id].step" class="msg_step">{{ data.states[state.id].step }}</div>
                         <p v-html="msg.text"></p>
