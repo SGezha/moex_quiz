@@ -103,7 +103,7 @@
                     </div>
                   </div>
                 </Transition>
-                <Transition name="fade">
+                <Transition name="fadeOnly">
                   <button v-if="lockScroll" @click="scrollToBot('smooth')" class="scroll_tobottom">
                     <svg width="48" height="54" viewBox="0 0 48 54" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path

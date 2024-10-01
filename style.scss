@@ -287,6 +287,16 @@
   transform: scale(0.9);
 }
 
+.fadeOnly-enter-active,
+.fadeOnly-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fadeOnly-enter-from,
+.fadeOnly-leave-to {
+  opacity: 0;
+}
+
 .chat-enter-active,
 .chat-leave-active {
   transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
@@ -706,9 +716,11 @@
 }
 
 .scroll_tobottom {
-  all: unset;
   cursor: pointer;
   position: absolute;
+  background: transparent;
+  border: none;
+  outline: none;
   right: 23px;
   bottom: 34px;
   filter: drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.20));
