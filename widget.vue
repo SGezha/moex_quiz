@@ -24,7 +24,8 @@
                     </svg>
                   </button>
                 </div>
-                <div ref="msg_chat" class="message_container" :style="`--bot_mar: ${curBotMargin};`">
+                <div ref="msg_chat" @scroll.passive="handleScroll" class="message_container"
+                  :style="`--bot_mar: ${curBotMargin};`">
                   <div v-for="(state, ind) in history" class="msg_list">
                     <div v-if="data.states[state.id].author" class="message_author">
                       {{ data.states[state.id].author }}
@@ -38,12 +39,14 @@
                         </div>
                       </div>
                       <div v-else v-for="(msg, ind) in data.states[state.id].messages" :key="msg"
-                        :style="`--delay: ${msg.noDelay == true ? '0' : (500 * ind)}ms;`" :class="`${msg.noAnimations ? 'noAnimation' : ''}`"
-                        @animationend="msg.noAnimations = true" class="msg message">
+                        :style="`--delay: ${msg.noDelay == true ? '0' : (500 * ind)}ms;`"
+                        :class="`${msg.noAnimations ? 'noAnimation' : ''}`" @animationend="msg.noAnimations = true"
+                        class="msg message">
                         <div v-if="data.states[state.id].step" class="msg_step">{{ data.states[state.id].step }}</div>
                         <p v-html="msg.text"></p>
                         <div v-if="msg.btn" class="msg_btns">
-                          <a v-for="btn in msg.btn" @click="clickLink(btn.label)" :href="btn.url" :target="btn.target" class="msg_btn">
+                          <a v-for="btn in msg.btn" @click="clickLink(btn.label)" :href="btn.url" :target="btn.target"
+                            class="msg_btn">
                             {{ btn.label }}
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
                               fill="none">
@@ -75,7 +78,7 @@
                 </div>
                 <Transition name="answer_btn">
                   <div v-if="answer.show" class="message_actions"
-                    :class="`${answer.noAnimations ? 'noAnimation' : ''} ${answer.show ? 'show' : ''} ${answer.on ? '' : 'no_anwser'}`"
+                    :class="`${answer.noAnimations ? 'noAnimation' : ''} ${hideBtns ? 'hide' : ''} ${answer.show ? 'show' : ''} ${answer.on ? '' : 'no_anwser'}`"
                     @animationend="answer.noAnimations = true" ref="message_actions">
                     <!-- <label>Выберите ответ:</label> -->
                     <div class="btn_container">
@@ -99,6 +102,20 @@
                       </button>
                     </div>
                   </div>
+                </Transition>
+                <Transition name="fade">
+                  <button v-if="lockScroll" @click="scrollToBot('smooth')" class="scroll_tobottom">
+                    <svg width="48" height="54" viewBox="0 0 48 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M0 30C0 16.7452 10.7452 6 24 6V6C37.2548 6 48 16.7452 48 30V30C48 43.2548 37.2548 54 24 54V54C10.7452 54 0 43.2548 0 30V30Z"
+                        fill="#388AF7" />
+                      <path d="M19 31.5L24 36.5L29 31.5" stroke="white" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                      <rect x="9" width="30" height="20" rx="10" fill="#FF0508" />
+                      <path d="M24.1436 5.19727H25.6133V15H23.8359V7.84277L21.6689 9.9209V7.61035L24.1436 5.19727Z"
+                        fill="white" />
+                    </svg>
+                  </button>
                 </Transition>
               </div>
               <div v-else class="chat_start">

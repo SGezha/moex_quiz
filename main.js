@@ -159,10 +159,23 @@ class MessageWidget {
           noAnimation: false,
           firstOpen: true,
           isPause: false,
-          animId: 0
+          animId: 0,
+          hideBtns: false,
+          lockScroll: false
         }
       },
       methods: {
+        handleScroll(e) {
+          const { scrollHeight, scrollTop, clientHeight } = e.target
+
+          if (Math.abs(scrollHeight - clientHeight - scrollTop) < 1) {
+            console.log('scrolled')
+            this.hideBtns = false
+            this.lockScroll = false
+          } else {
+            this.hideBtns = true
+          }
+        },
         async toggleOpen() {
           window.dataLayer = window.dataLayer || []
           dataLayer.push({ 'event': 'data-event', 'eventCategory': 'chat_bot', 'eventAction': 'show_pop_up_chat_bot' })
@@ -231,15 +244,25 @@ class MessageWidget {
           this.answer.show = true
         },
         async nextQuest(id, answer, messages) {
+          this.lockScroll = false
+          this.hideBtns = false
           let newMessages = this.data.states[id].messages
           this.data.states[id].messages = []
+          newMessages.forEach((s, ind) => {
+            s.noDelay = false
+          })
           newMessages.forEach((s, ind) => {
             setTimeout(() => {
               s.noDelay = true
               this.data.states[id].messages.push(s)
-              setTimeout(() => {
-                this.scrollToBot('smooth')
-              }, 1)
+              if (ind < 2) {
+                setTimeout(() => {
+                  this.scrollToBot('smooth')
+                }, 1)
+              } else {
+                this.lockScroll = true
+                this.hideBtns = true
+              }
             }, ind * 500)
           })
           this.history.push({ id, answer: null, messages, isTyping: false })
@@ -386,7 +409,9 @@ class MessageWidget {
               this.curBotMargin = `${document.querySelector('.message_actions')?.clientHeight + 20
                 }px`
               await timeout(1)
-              this.scrollToBot()
+              if(!this.lockScroll) {
+                this.scrollToBot()
+              }
             } else {
               this.curBotMargin = '20px'
             }

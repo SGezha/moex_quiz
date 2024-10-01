@@ -50,10 +50,10 @@ export const data = {
       author: '',
       messages: [
         {
-          text: `Для проведения IPO рекомендуемый размер выручки компании должен составлять не менее 1 млрд. руб.`,
+          text: `Для проведения IPO рекомендуемый размер выручки компании должен составлять не менее 1 млрд. ₽`,
         },
         {
-          text: `Если компания входит в Группу, рекомендуем рассмотреть иную компанию в качестве эмитента с выручкой свыше 1 млрд. руб.`,
+          text: `Если компания входит в Группу, рекомендуем рассмотреть иную компанию в качестве эмитента с выручкой свыше 1 млрд. ₽`,
         },
         {
           text: `Либо рекомендуем рассмотреть инструменты публичного долгового финансирования. Хотите узнать больше про выход на публичный долговой рынок?`,
@@ -83,12 +83,12 @@ export const data = {
       on: {
         'to bad final O_1': {
           target: 'bad final O_1',
-          label: 'Меньше 120 млн',
+          label: 'Меньше 120 млн. ₽',
           type: 'btn'
         },
         'to O_2': {
           target: 'O_2',
-          label: 'Больше 120 млн',
+          label: 'Больше 120 млн. ₽',
           type: 'btn'
         }
       }
@@ -103,14 +103,8 @@ export const data = {
           text: `На данном этапе можно начать подготовку к выпуску облигаций и изучать информационные  и обучающие материалы`,
         },
         {
-          text: `Если компания входит в Группу, рекомендуем рассмотреть иную компанию в качестве эмитента с выручкой свыше 120 млн.руб.`,
+          text: `Если компания входит в Группу, рекомендуем рассмотреть иную компанию в качестве эмитента с выручкой свыше 120 млн. ₽`,
           btn: [
-            {
-              label: 'MOEX IR-СЕРВИСЫ',
-              type: 'btn',
-              url: 'https://www.moex.com/s3228',
-              target: '_blank'
-            },
             {
               label: 'Гид по облигациям',
               type: 'btn',
@@ -133,6 +127,12 @@ export const data = {
               label: 'Эмитентам',
               type: 'btn',
               url: 'https://www.moex.com/msn/issuers',
+              target: '_blank'
+            },
+            {
+              label: 'MOEX IR-СЕРВИСЫ',
+              type: 'btn',
+              url: 'https://www.moex.com/s3228',
               target: '_blank'
             }
           ]
@@ -167,17 +167,11 @@ export const data = {
           text: `Для проведения IPO срок бизнеса должен быть свыше 1 года.`,
         },
         {
-          text: `Если компания входит в Группу, рекомендуем рассмотреть иную компанию в качестве эмитента с выручкой свыше 1 млрд. руб. и сроком бизнеса свыше 1 года.`,
+          text: `Если компания входит в Группу, рекомендуем рассмотреть иную компанию в качестве эмитента с выручкой свыше 1 млрд. ₽ и сроком бизнеса свыше 1 года.`,
         },
         {
           text: `Ознакомьтесь, пожалуйста, с информационными и обучающими материалами: `,
           btn: [
-            {
-              label: 'MOEX IR-СЕРВИСЫ',
-              type: 'btn',
-              url: 'https://www.moex.com/s3228',
-              target: '_blank'
-            },
             {
               label: 'Гид по облигациям',
               type: 'btn',
@@ -200,6 +194,12 @@ export const data = {
               label: 'Эмитентам',
               type: 'btn',
               url: 'https://www.moex.com/msn/issuers',
+              target: '_blank'
+            },
+            {
+              label: 'MOEX IR-СЕРВИСЫ',
+              type: 'btn',
+              url: 'https://www.moex.com/s3228',
               target: '_blank'
             }
           ]
@@ -237,14 +237,8 @@ export const data = {
           text: `На данном этапе можно начать подготовку к выпуску облигаций и изучать информационные  и обучающие материалы`,
         },
         {
-          text: `Если компания входит в Группу, рекомендуем рассмотреть иную компанию в качестве эмитента с выручкой свыше 120 млн.руб. и сроком бизнеса свыше 3-х лет`,
+          text: `Если компания входит в Группу, рекомендуем рассмотреть иную компанию в качестве эмитента с выручкой свыше 120 млн. ₽ и сроком бизнеса свыше 3-х лет`,
           btn: [
-            {
-              label: 'MOEX IR-СЕРВИСЫ',
-              type: 'btn',
-              url: 'https://www.moex.com/s3228',
-              target: '_blank'
-            },
             {
               label: 'Гид по облигациям',
               type: 'btn',
@@ -267,6 +261,12 @@ export const data = {
               label: 'Эмитентам',
               type: 'btn',
               url: 'https://www.moex.com/msn/issuers',
+              target: '_blank'
+            },
+            {
+              label: 'MOEX IR-СЕРВИСЫ',
+              type: 'btn',
+              url: 'https://www.moex.com/s3228',
               target: '_blank'
             }
           ]
@@ -335,7 +335,7 @@ export const data = {
           text: `На данном этапе можно начать подготовку к выпуску облигаций и изучать информационные  и обучающие материалы`,
         },
         {
-          text: `Если компания входит в Группу, рекомендуем рассмотреть иную компанию в качестве эмитента с выручкой свыше 120 млн.руб., сроком бизнеса свыше 3-х лет и положительным размером ЧА`,
+          text: `Если компания входит в Группу, рекомендуем рассмотреть иную компанию в качестве эмитента с выручкой свыше 120 млн. ₽, сроком бизнеса свыше 3-х лет и положительным размером ЧА`,
         },
         {
           text: `Хотите  получить дополнительную информацию о возможных вариантах?`
@@ -361,12 +361,6 @@ export const data = {
           text: `Ознакомьтесь, пожалуйста, с информационными и обучающими материалами:`,
           btn: [
             {
-              label: 'MOEX IR-СЕРВИСЫ',
-              type: 'btn',
-              url: 'https://www.moex.com/s3228',
-              target: '_blank'
-            },
-            {
               label: 'Гид по облигациям',
               type: 'btn',
               url: 'https://bondguide.moex.com/',
@@ -388,6 +382,12 @@ export const data = {
               label: 'Эмитентам',
               type: 'btn',
               url: 'https://www.moex.com/fsn/ru-listing-issuer-how-to-become-issuer',
+              target: '_blank'
+            },
+            {
+              label: 'MOEX IR-СЕРВИСЫ',
+              type: 'btn',
+              url: 'https://www.moex.com/s3228',
               target: '_blank'
             }
           ]
@@ -410,12 +410,6 @@ export const data = {
               target: '_blank'
             },
             {
-              label: 'MOEX IR-СЕРВИСЫ',
-              type: 'btn',
-              url: 'https://www.moex.com/s3228',
-              target: '_blank'
-            },
-            {
               label: 'Гид по облигациям',
               type: 'btn',
               url: 'https://bondguide.moex.com/',
@@ -436,7 +430,13 @@ export const data = {
             {
               label: 'Эмитентам',
               type: 'btn',
-              url: 'https://www.moex.com/fsn/ru-listing-issuer-how-to-become-issuer',
+              url: 'https://www.moex.com/msn/issuers',
+              target: '_blank'
+            },
+            {
+              label: 'MOEX IR-СЕРВИСЫ',
+              type: 'btn',
+              url: 'https://www.moex.com/s3228',
               target: '_blank'
             }
           ]
@@ -448,7 +448,7 @@ export const data = {
       step: 'Вопрос 3 из 3:',
       messages: [
         {
-          text: `Общались ли вы с банками-организаторами?`
+          text: `Общались ли вы с организаторами IPO?`
         }
       ],
       on: {
@@ -477,12 +477,6 @@ export const data = {
               target: '_blank'
             },
             {
-              label: 'MOEX IR-СЕРВИСЫ',
-              type: 'btn',
-              url: 'https://www.moex.com/s3228',
-              target: '_blank'
-            },
-            {
               label: 'Гид по облигациям',
               type: 'btn',
               url: 'https://bondguide.moex.com/',
@@ -503,7 +497,13 @@ export const data = {
             {
               label: 'Эмитентам',
               type: 'btn',
-              url: 'https://www.moex.com/fsn/ru-listing-issuer-how-to-become-issuer',
+              url: 'https://www.moex.com/msn/issuers',
+              target: '_blank'
+            },
+            {
+              label: 'MOEX IR-СЕРВИСЫ',
+              type: 'btn',
+              url: 'https://www.moex.com/s3228',
               target: '_blank'
             }
           ]
@@ -529,12 +529,6 @@ export const data = {
               target: '_blank'
             },
             {
-              label: 'MOEX IR-СЕРВИСЫ',
-              type: 'btn',
-              url: 'https://www.moex.com/s3228',
-              target: '_blank'
-            },
-            {
               label: 'Гид по облигациям',
               type: 'btn',
               url: 'https://bondguide.moex.com/',
@@ -555,7 +549,13 @@ export const data = {
             {
               label: 'Эмитентам',
               type: 'btn',
-              url: 'https://www.moex.com/fsn/ru-listing-issuer-how-to-become-issuer',
+              url: 'https://www.moex.com/msn/issuers',
+              target: '_blank'
+            },
+            {
+              label: 'MOEX IR-СЕРВИСЫ',
+              type: 'btn',
+              url: 'https://www.moex.com/s3228',
               target: '_blank'
             }
           ]
@@ -566,7 +566,7 @@ export const data = {
       author: '',
       messages: [
         {
-          text: `Ваша компания является потенциальным кандидатом для выхода на публичный долговой рынка. `,
+          text: `Ваша компания является потенциальным кандидатом для выхода на публичный долговой рынок. `,
         },
         {
           text: `Свяжитесь, пожалуйста, с нами для уточнения деталей:`,
@@ -578,12 +578,6 @@ export const data = {
               target: '_blank'
             },
             {
-              label: 'MOEX IR-СЕРВИСЫ',
-              type: 'btn',
-              url: 'https://www.moex.com/s3228',
-              target: '_blank'
-            },
-            {
               label: 'Гид по облигациям',
               type: 'btn',
               url: 'https://bondguide.moex.com/',
@@ -604,7 +598,13 @@ export const data = {
             {
               label: 'Эмитентам',
               type: 'btn',
-              url: 'https://www.moex.com/fsn/ru-listing-issuer-how-to-become-issuer',
+              url: 'https://www.moex.com/msn/issuers',
+              target: '_blank'
+            },
+            {
+              label: 'MOEX IR-СЕРВИСЫ',
+              type: 'btn',
+              url: 'https://www.moex.com/s3228',
               target: '_blank'
             }
           ]
