@@ -169,7 +169,6 @@ class MessageWidget {
           const { scrollHeight, scrollTop, clientHeight } = e.target
 
           if (Math.abs(scrollHeight - clientHeight - scrollTop) < 1) {
-            console.log('scrolled')
             this.hideBtns = false
             this.lockScroll = false
           } else {
@@ -278,6 +277,7 @@ class MessageWidget {
         },
         async reset() {
           if (this.isLock) return
+          this.hideBtns = false
           this.isBg = false
           this.showChat = false
           this.answer.show = false
