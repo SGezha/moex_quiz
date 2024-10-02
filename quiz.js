@@ -106,6 +106,12 @@ export const data = {
           text: `Если компания входит в Группу, рекомендуем рассмотреть иную компанию в качестве эмитента с выручкой свыше 120 млн. ₽`,
           btn: [
             {
+              label: 'Эмитентам',
+              type: 'btn',
+              url: 'https://www.moex.com/msn/issuers',
+              target: '_blank'
+            },
+            {
               label: 'Гид по облигациям',
               type: 'btn',
               url: 'https://bondguide.moex.com/',
@@ -121,12 +127,6 @@ export const data = {
               label: 'ESG-гид',
               type: 'btn',
               url: 'https://fs.moex.com/f/16010/mosbirzha-esg-rus-book-1012.pdf',
-              target: '_blank'
-            },
-            {
-              label: 'Эмитентам',
-              type: 'btn',
-              url: 'https://www.moex.com/msn/issuers',
               target: '_blank'
             },
             {
@@ -173,6 +173,12 @@ export const data = {
           text: `Ознакомьтесь, пожалуйста, с информационными и обучающими материалами: `,
           btn: [
             {
+              label: 'Эмитентам',
+              type: 'btn',
+              url: 'https://www.moex.com/msn/issuers',
+              target: '_blank'
+            },
+            {
               label: 'Гид по облигациям',
               type: 'btn',
               url: 'https://bondguide.moex.com/',
@@ -188,12 +194,6 @@ export const data = {
               label: 'ESG-гид',
               type: 'btn',
               url: 'https://fs.moex.com/f/16010/mosbirzha-esg-rus-book-1012.pdf',
-              target: '_blank'
-            },
-            {
-              label: 'Эмитентам',
-              type: 'btn',
-              url: 'https://www.moex.com/msn/issuers',
               target: '_blank'
             },
             {
@@ -240,6 +240,12 @@ export const data = {
           text: `Если компания входит в Группу, рекомендуем рассмотреть иную компанию в качестве эмитента с выручкой свыше 120 млн. ₽ и сроком бизнеса свыше 3-х лет`,
           btn: [
             {
+              label: 'Эмитентам',
+              type: 'btn',
+              url: 'https://www.moex.com/msn/issuers',
+              target: '_blank'
+            },
+            {
               label: 'Гид по облигациям',
               type: 'btn',
               url: 'https://bondguide.moex.com/',
@@ -255,12 +261,6 @@ export const data = {
               label: 'ESG-гид',
               type: 'btn',
               url: 'https://fs.moex.com/f/16010/mosbirzha-esg-rus-book-1012.pdf',
-              target: '_blank'
-            },
-            {
-              label: 'Эмитентам',
-              type: 'btn',
-              url: 'https://www.moex.com/msn/issuers',
               target: '_blank'
             },
             {
@@ -361,6 +361,12 @@ export const data = {
           text: `Ознакомьтесь, пожалуйста, с информационными и обучающими материалами:`,
           btn: [
             {
+              label: 'Эмитентам',
+              type: 'btn',
+              url: 'https://www.moex.com/fsn/ru-listing-issuer-how-to-become-issuer',
+              target: '_blank'
+            },
+            {
               label: 'Гид по облигациям',
               type: 'btn',
               url: 'https://bondguide.moex.com/',
@@ -376,12 +382,6 @@ export const data = {
               label: 'ESG-гид',
               type: 'btn',
               url: 'https://fs.moex.com/f/16010/mosbirzha-esg-rus-book-1012.pdf',
-              target: '_blank'
-            },
-            {
-              label: 'Эмитентам',
-              type: 'btn',
-              url: 'https://www.moex.com/fsn/ru-listing-issuer-how-to-become-issuer',
               target: '_blank'
             },
             {
@@ -410,6 +410,12 @@ export const data = {
               target: '_blank'
             },
             {
+              label: 'Эмитентам',
+              type: 'btn',
+              url: 'https://www.moex.com/msn/issuers',
+              target: '_blank'
+            },
+            {
               label: 'Гид по облигациям',
               type: 'btn',
               url: 'https://bondguide.moex.com/',
@@ -425,12 +431,6 @@ export const data = {
               label: 'ESG-гид',
               type: 'btn',
               url: 'https://fs.moex.com/f/16010/mosbirzha-esg-rus-book-1012.pdf',
-              target: '_blank'
-            },
-            {
-              label: 'Эмитентам',
-              type: 'btn',
-              url: 'https://www.moex.com/msn/issuers',
               target: '_blank'
             },
             {
@@ -477,6 +477,12 @@ export const data = {
               target: '_blank'
             },
             {
+              label: 'Эмитентам',
+              type: 'btn',
+              url: 'https://www.moex.com/msn/issuers',
+              target: '_blank'
+            },
+            {
               label: 'Гид по облигациям',
               type: 'btn',
               url: 'https://bondguide.moex.com/',
@@ -492,12 +498,6 @@ export const data = {
               label: 'ESG-гид',
               type: 'btn',
               url: 'https://fs.moex.com/f/16010/mosbirzha-esg-rus-book-1012.pdf',
-              target: '_blank'
-            },
-            {
-              label: 'Эмитентам',
-              type: 'btn',
-              url: 'https://www.moex.com/msn/issuers',
               target: '_blank'
             },
             {
@@ -529,6 +529,12 @@ export const data = {
               target: '_blank'
             },
             {
+              label: 'Эмитентам',
+              type: 'btn',
+              url: 'https://www.moex.com/msn/issuers',
+              target: '_blank'
+            },
+            {
               label: 'Гид по облигациям',
               type: 'btn',
               url: 'https://bondguide.moex.com/',
@@ -544,12 +550,6 @@ export const data = {
               label: 'ESG-гид',
               type: 'btn',
               url: 'https://fs.moex.com/f/16010/mosbirzha-esg-rus-book-1012.pdf',
-              target: '_blank'
-            },
-            {
-              label: 'Эмитентам',
-              type: 'btn',
-              url: 'https://www.moex.com/msn/issuers',
               target: '_blank'
             },
             {
@@ -578,6 +578,12 @@ export const data = {
               target: '_blank'
             },
             {
+              label: 'Эмитентам',
+              type: 'btn',
+              url: 'https://www.moex.com/msn/issuers',
+              target: '_blank'
+            },
+            {
               label: 'Гид по облигациям',
               type: 'btn',
               url: 'https://bondguide.moex.com/',
@@ -593,12 +599,6 @@ export const data = {
               label: 'ESG-гид',
               type: 'btn',
               url: 'https://fs.moex.com/f/16010/mosbirzha-esg-rus-book-1012.pdf',
-              target: '_blank'
-            },
-            {
-              label: 'Эмитентам',
-              type: 'btn',
-              url: 'https://www.moex.com/msn/issuers',
               target: '_blank'
             },
             {
