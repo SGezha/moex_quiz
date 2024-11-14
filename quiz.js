@@ -1,5 +1,5 @@
 export const data = {
-  id: 'quiz_290724',
+  id: 'quiz_301024',
   initial: 'idle',
   states: {
     idle: {
@@ -30,18 +30,18 @@ export const data = {
       step: 'Вопрос 1 из 3:',
       messages: [
         {
-          text: `Какая выручка у вашей компании за последний календарный год?`
+          text: `Какой объем финансирования вы хотели бы привлечь?`
         }
       ],
       on: {
         'to A_2_1': {
           target: 'bad final A_1',
-          label: 'Меньше 1 млрд. ₽',
+          label: 'Меньше 300 млн. руб.',
           type: 'btn'
         },
         'to A_2_2': {
           target: 'A_2',
-          label: 'Больше 1 млрд. ₽',
+          label: 'Больше 300 млн. руб.',
           type: 'btn'
         }
       }
@@ -50,13 +50,13 @@ export const data = {
       author: '',
       messages: [
         {
-          text: `Для проведения IPO рекомендуемый размер выручки компании должен составлять не менее 1 млрд. ₽`,
+          text: `Рекомендуемый объем сделки для проведения IPO составляет не менее 300 млн. руб.`,
         },
         {
-          text: `Если компания входит в Группу, рекомендуем рассмотреть иную компанию в качестве эмитента с выручкой свыше 1 млрд. ₽`,
+          text: `Возможный альтернативный вариант по привлечению финансирования – выпуск и размещение облигаций.`,
         },
         {
-          text: `Либо рекомендуем рассмотреть инструменты публичного долгового финансирования. Хотите узнать больше про выход на публичный долговой рынок?`,
+          text: `Хотите узнать больше про выход на публичный долговой рынок?`,
         }
       ],
       on: {
@@ -77,18 +77,18 @@ export const data = {
       step: 'Вопрос 1 из 3:',
       messages: [
         {
-          text: `Какая выручка у вашей компании за последний календарный год?`
+          text: `Какой объем финансирования вы хотели бы привлечь?`
         }
       ],
       on: {
         'to bad final O_1': {
           target: 'bad final O_1',
-          label: 'Меньше 120 млн. ₽',
+          label: 'Меньше 50 млн. руб.',
           type: 'btn'
         },
         'to O_2': {
           target: 'O_2',
-          label: 'Больше 120 млн. ₽',
+          label: 'Больше 50 млн. руб.',
           type: 'btn'
         }
       }
@@ -97,42 +97,21 @@ export const data = {
       author: '',
       messages: [
         {
-          text: `Инструменты публичного финансирования пока недоступны вашей компании, необходима выручка больше 120 млн.р.`,
+          text: `Рекомендуемый объем сделки по выходу на рынок облигаций составляет не менее 50 млн. руб.`,
         },
         {
-          text: `На данном этапе можно начать подготовку к выпуску облигаций и изучать информационные  и обучающие материалы`,
-        },
-        {
-          text: `Если компания входит в Группу, рекомендуем рассмотреть иную компанию в качестве эмитента с выручкой свыше 120 млн. ₽`,
+          text: `Возможный альтернативный вариант по привлечению финансирования – выпуск и продажа ЦФА на денежные требования либо коммерческие облигации.`,
           btn: [
             {
-              label: 'Эмитентам',
+              label: 'Узнать о ЦФА',
               type: 'btn',
-              url: 'https://www.moex.com/msn/issuers',
+              url: 'https://www.moex.com/ru/digital-assets',
               target: '_blank'
             },
             {
-              label: 'Гид по облигациям',
+              label: 'Узнать про коммерческие облигации',
               type: 'btn',
-              url: 'https://bondguide.moex.com/',
-              target: '_blank'
-            },
-            {
-              label: 'IPO-гид',
-              type: 'btn',
-              url: 'https://fs.moex.com/f/19351/mosbirzha-ipo-guide2023-rus-book.pdf',
-              target: '_blank'
-            },
-            {
-              label: 'ESG-гид',
-              type: 'btn',
-              url: 'https://fs.moex.com/f/16010/mosbirzha-esg-rus-book-1012.pdf',
-              target: '_blank'
-            },
-            {
-              label: 'MOEX IR-СЕРВИСЫ',
-              type: 'btn',
-              url: 'https://www.moex.com/s3228',
+              url: 'https://www.nsd.ru/services/depozitariy/uslugi-dlya-emitentov/kommercheskie-obligatsii',
               target: '_blank'
             }
           ]
@@ -144,18 +123,18 @@ export const data = {
       step: 'Вопрос 2 из 3:',
       messages: [
         {
-          text: `Сколько существует ваш бизнес?`
+          text: `Какая выручка у вашей компании (группы компаний) за последний календарный год?`
         }
       ],
       on: {
         'to A_3_1': {
           target: 'bad final A_2',
-          label: 'Меньше 1 года',
+          label: 'Меньше 1 млрд. руб.',
           type: 'btn'
         },
         'to A_3_2': {
           target: 'A_3',
-          label: 'Больше 1 года',
+          label: 'Больше 1 млрд. руб.',
           type: 'btn'
         },
       }
@@ -164,65 +143,45 @@ export const data = {
       author: '',
       messages: [
         {
-          text: `Для проведения IPO срок бизнеса должен быть свыше 1 года.`,
+          text: `Рыночная практика последних лет показывает, что сделки IPO проходят успешно для компаний с выручкой более 1 млрд. руб.`,
         },
         {
-          text: `Если компания входит в Группу, рекомендуем рассмотреть иную компанию в качестве эмитента с выручкой свыше 1 млрд. ₽ и сроком бизнеса свыше 1 года.`,
+          text: `Возможный альтернативный вариант по привлечению финансирования – выпуск и размещение облигаций.`,
         },
         {
-          text: `Ознакомьтесь, пожалуйста, с информационными и обучающими материалами: `,
-          btn: [
-            {
-              label: 'Эмитентам',
-              type: 'btn',
-              url: 'https://www.moex.com/msn/issuers',
-              target: '_blank'
-            },
-            {
-              label: 'Гид по облигациям',
-              type: 'btn',
-              url: 'https://bondguide.moex.com/',
-              target: '_blank'
-            },
-            {
-              label: 'IPO-гид',
-              type: 'btn',
-              url: 'https://fs.moex.com/f/19351/mosbirzha-ipo-guide2023-rus-book.pdf',
-              target: '_blank'
-            },
-            {
-              label: 'ESG-гид',
-              type: 'btn',
-              url: 'https://fs.moex.com/f/16010/mosbirzha-esg-rus-book-1012.pdf',
-              target: '_blank'
-            },
-            {
-              label: 'MOEX IR-СЕРВИСЫ',
-              type: 'btn',
-              url: 'https://www.moex.com/s3228',
-              target: '_blank'
-            }
-          ]
+          text: `Хотите узнать больше про выход на публичный долговой рынок? `,
         }
       ],
+      on: {
+        'to O_1': {
+          target: 'O_2',
+          label: 'Да',
+          type: 'btn'
+        },
+        'to info': {
+          target: 'info',
+          label: 'Нет',
+          type: 'btn'
+        }
+      }
     },
     O_2: {
       author: '',
       step: 'Вопрос 2 из 3:',
       messages: [
         {
-          text: `Сколько существует ваш бизнес?`
+          text: `Какая выручка у вашей компании за последний календарный год?`
         }
       ],
       on: {
         'to bad final O': {
           target: 'bad final O_2',
-          label: 'Меньше 3 лет',
+          label: 'Меньше 120 млн. руб.',
           type: 'btn'
         },
         'to O_3': {
           target: 'O_3',
-          label: 'Больше 3 лет',
+          label: 'Больше 120 млн. руб.',
           type: 'btn'
         }
       }
@@ -231,42 +190,24 @@ export const data = {
       author: '',
       messages: [
         {
-          text: `Инструменты публичного финансирования пока недоступны вашей компании, срок бизнеса должен быть свыше 3-х лет`,
+          text: `Рыночная практика последних лет показывает, что на рынке облигаций успешно проходят сделки для компаний с выручкой более 120 млн. руб.`,
         },
         {
-          text: `На данном этапе можно начать подготовку к выпуску облигаций и изучать информационные  и обучающие материалы`,
+          text: `Если компания входит в группу компаний, рекомендуем рассмотреть в качестве эмитента компанию с выручкой свыше 120 млн. руб.`,
         },
         {
-          text: `Если компания входит в Группу, рекомендуем рассмотреть иную компанию в качестве эмитента с выручкой свыше 120 млн. ₽ и сроком бизнеса свыше 3-х лет`,
+          text: `Возможный альтернативный вариант по привлечению финансирования – выпуск и продажа ЦФА на денежные требования либо коммерческие облигации.`,
           btn: [
             {
-              label: 'Эмитентам',
+              label: 'Узнать о ЦФА',
               type: 'btn',
-              url: 'https://www.moex.com/msn/issuers',
+              url: 'https://www.moex.com/ru/digital-assets',
               target: '_blank'
             },
             {
-              label: 'Гид по облигациям',
+              label: 'Узнать про коммерческие облигации',
               type: 'btn',
-              url: 'https://bondguide.moex.com/',
-              target: '_blank'
-            },
-            {
-              label: 'IPO-гид',
-              type: 'btn',
-              url: 'https://fs.moex.com/f/19351/mosbirzha-ipo-guide2023-rus-book.pdf',
-              target: '_blank'
-            },
-            {
-              label: 'ESG-гид',
-              type: 'btn',
-              url: 'https://fs.moex.com/f/16010/mosbirzha-esg-rus-book-1012.pdf',
-              target: '_blank'
-            },
-            {
-              label: 'MOEX IR-СЕРВИСЫ',
-              type: 'btn',
-              url: 'https://www.moex.com/s3228',
+              url: 'https://www.nsd.ru/services/depozitariy/uslugi-dlya-emitentov/kommercheskie-obligatsii',
               target: '_blank'
             }
           ]
@@ -309,18 +250,18 @@ export const data = {
       step: 'Вопрос 3 из 3:',
       messages: [
         {
-          text: `Является ли размер ваших чистых активов положительным?`
+          text: `Сколько существует ваш бизнес?`
         }
       ],
       on: {
-        'final O': {
-          target: 'good final O',
-          label: 'Да',
-          type: 'btn'
-        },
         'to bad final O': {
           target: 'bad final O_3',
-          label: 'Нет',
+          label: 'Меньше 3 лет',
+          type: 'btn'
+        },
+        'final O': {
+          target: 'good final O',
+          label: 'Больше 3 лет',
           type: 'btn'
         }
       }
@@ -329,30 +270,35 @@ export const data = {
       author: '',
       messages: [
         {
-          text: `Инструменты публичного финансирования пока недоступны вашей компании, необходим положительный размер ЧА.`,
+          text: `Рыночная практика последних лет показывает, что на рынке облигаций успешно проходят сделки для компаний со сроком бизнеса более 3 лет.`,
         },
         {
-          text: `На данном этапе можно начать подготовку к выпуску облигаций и изучать информационные  и обучающие материалы`,
+          text: `Если компания входит в группу компаний, рекомендуем рассмотреть в качестве эмитента компанию с выручкой свыше 120 млн. руб. и сроком бизнеса более 3 лет.`,
         },
         {
-          text: `Если компания входит в Группу, рекомендуем рассмотреть иную компанию в качестве эмитента с выручкой свыше 120 млн. ₽, сроком бизнеса свыше 3-х лет и положительным размером ЧА`,
-        },
-        {
-          text: `Хотите  получить дополнительную информацию о возможных вариантах?`
+          text: `Возможный альтернативный вариант по привлечению финансирования – выпуск и продажа ЦФА на денежные требования либо коммерческие облигации.`,
+          btn: [
+            {
+              label: 'Узнать о ЦФА',
+              type: 'btn',
+              url: 'https://www.moex.com/ru/digital-assets',
+              target: '_blank'
+            },
+            {
+              label: 'Узнать про коммерческие облигации',
+              type: 'btn',
+              url: 'https://www.nsd.ru/services/depozitariy/uslugi-dlya-emitentov/kommercheskie-obligatsii',
+              target: '_blank'
+            },
+            {
+              label: 'Гид по облигациям',
+              type: 'btn',
+              url: 'https://bondguide.moex.com/',
+              target: '_blank'
+            },
+          ]
         }
       ],
-      on: {
-        'to more': {
-          target: 'more',
-          label: 'Да',
-          type: 'btn'
-        },
-        'to info': {
-          target: 'info',
-          label: 'Нет',
-          type: 'btn'
-        }
-      }
     },
     'info': {
       author: '',
@@ -363,13 +309,7 @@ export const data = {
             {
               label: 'Эмитентам',
               type: 'btn',
-              url: 'https://www.moex.com/fsn/ru-listing-issuer-how-to-become-issuer',
-              target: '_blank'
-            },
-            {
-              label: 'Гид по облигациям',
-              type: 'btn',
-              url: 'https://bondguide.moex.com/',
+              url: 'https://www.moex.com/msn/issuers',
               target: '_blank'
             },
             {
@@ -378,18 +318,6 @@ export const data = {
               url: 'https://fs.moex.com/f/19351/mosbirzha-ipo-guide2023-rus-book.pdf',
               target: '_blank'
             },
-            {
-              label: 'ESG-гид',
-              type: 'btn',
-              url: 'https://fs.moex.com/f/16010/mosbirzha-esg-rus-book-1012.pdf',
-              target: '_blank'
-            },
-            {
-              label: 'MOEX IR-СЕРВИСЫ',
-              type: 'btn',
-              url: 'https://www.moex.com/s3228',
-              target: '_blank'
-            }
           ]
         }
       ],
@@ -401,7 +329,7 @@ export const data = {
           text: `Компания может быть рассмотрена как  потенциальный кандидат при дополнительных условиях к выпуску облигаций:\n- выпуск только для квалифицированных инвесторов или \n- наличие в структуре выпуска поручителя , СЧА которого  покрывают размер выпуска эмитента и проценты по нему.`,
         },
         {
-          text: `Свяжитесь, пожалуйста, с нами для уточнения деталей:`,
+          text: `Свяжитесь, пожалуйста, с нами для уточнения деталей. В запросе укажите название и ИНН вашей компании, а также телефон представителя:`,
           btn: [
             {
               label: 'Связаться',
@@ -448,18 +376,18 @@ export const data = {
       step: 'Вопрос 3 из 3:',
       messages: [
         {
-          text: `Общались ли вы с организаторами IPO?`
+          text: `Сколько существует ваш бизнес?`
         }
       ],
       on: {
         'final A': {
-          target: 'good final A_YES',
-          label: 'Да',
+          target: 'good final A_NO',
+          label: 'Меньше 3 лет',
           type: 'btn'
         },
         'final A_2': {
-          target: 'good final A_NO',
-          label: 'Нет',
+          target: 'good final A_YES',
+          label: 'Больше 3 лет',
           type: 'btn'
         }
       }
@@ -468,12 +396,12 @@ export const data = {
       author: '',
       messages: [
         {
-          text: `Ваша компания является потенциальным кандидатом для проведения IPO. Свяжитесь, пожалуйста, с нами для уточнения деталей:`,
+          text: `Ваша компания является потенциальным кандидатом для проведения IPO.\n Свяжитесь, пожалуйста, с нами для уточнения деталей. В запросе укажите название и ИНН вашей компании, а также телефон представителя:`,
           btn: [
             {
-              label: 'Связаться',
+              label: 'Оставить заявку',
               type: 'btn',
-              url: '/ru/lead-connection',
+              url: 'mailto:issuersconsulting@moex.com',
               target: '_blank'
             },
             {
@@ -483,21 +411,9 @@ export const data = {
               target: '_blank'
             },
             {
-              label: 'Гид по облигациям',
-              type: 'btn',
-              url: 'https://bondguide.moex.com/',
-              target: '_blank'
-            },
-            {
               label: 'IPO-гид',
               type: 'btn',
               url: 'https://fs.moex.com/f/19351/mosbirzha-ipo-guide2023-rus-book.pdf',
-              target: '_blank'
-            },
-            {
-              label: 'ESG-гид',
-              type: 'btn',
-              url: 'https://fs.moex.com/f/16010/mosbirzha-esg-rus-book-1012.pdf',
               target: '_blank'
             },
             {
@@ -514,30 +430,21 @@ export const data = {
       author: '',
       messages: [
         {
-          text: `Ваша компания является потенциальным кандидатом для проведения IPO. Свяжитесь, пожалуйста, с нами для уточнения деталей:`,
+          text: `Рыночная практика последних лет показывает, что сделки IPO проходят успешно для компаний со сроком бизнеса более 3 лет.`
+        },
+        {
+          text: `Возможный альтернативный вариант по привлечению финансирования – выпуск и продажа ЦФА на денежные требования или коммерческие облигации.`,
           btn: [
             {
-              label: 'Связаться',
+              label: 'Узнать о ЦФА',
               type: 'btn',
-              url: '/ru/lead-connection',
+              url: 'https://www.moex.com/ru/digital-assets',
               target: '_blank'
             },
             {
-              label: 'Открыть список банков',
+              label: 'Узнать про коммерческие облигации',
               type: 'btn',
-              url: 'https://www.moex.com/s3338',
-              target: '_blank'
-            },
-            {
-              label: 'Эмитентам',
-              type: 'btn',
-              url: 'https://www.moex.com/msn/issuers',
-              target: '_blank'
-            },
-            {
-              label: 'Гид по облигациям',
-              type: 'btn',
-              url: 'https://bondguide.moex.com/',
+              url: 'https://www.nsd.ru/services/depozitariy/uslugi-dlya-emitentov/kommercheskie-obligatsii',
               target: '_blank'
             },
             {
@@ -547,17 +454,11 @@ export const data = {
               target: '_blank'
             },
             {
-              label: 'ESG-гид',
+              label: 'Эмитентам',
               type: 'btn',
-              url: 'https://fs.moex.com/f/16010/mosbirzha-esg-rus-book-1012.pdf',
+              url: 'https://www.moex.com/msn/issuers',
               target: '_blank'
             },
-            {
-              label: 'MOEX IR-СЕРВИСЫ',
-              type: 'btn',
-              url: 'https://www.moex.com/s3228',
-              target: '_blank'
-            }
           ]
         }
       ],
@@ -566,39 +467,27 @@ export const data = {
       author: '',
       messages: [
         {
-          text: `Ваша компания является потенциальным кандидатом для выхода на публичный долговой рынок. `,
+          text: `Ваша компания является потенциальным кандидатом для выхода на публичный долговой рынок.`,
         },
         {
-          text: `Свяжитесь, пожалуйста, с нами для уточнения деталей:`,
+          text: `Свяжитесь, пожалуйста, с нами для уточнения деталей. В запросе укажите название и ИНН вашей компании, а также телефон представителя:`,
           btn: [
             {
-              label: 'Связаться',
+              label: 'Оставить заявку',
               type: 'btn',
-              url: '/ru/lead-connection',
+              url: 'mailto:Primarybonds@moex.com',
               target: '_blank'
             },
             {
-              label: 'Эмитентам',
+              label: 'Эмитентам облигаций',
               type: 'btn',
-              url: 'https://www.moex.com/msn/issuers',
+              url: 'https://www.moex.com/fsn/ru-listing-issuer-how-to-become-issuer',
               target: '_blank'
             },
             {
               label: 'Гид по облигациям',
               type: 'btn',
               url: 'https://bondguide.moex.com/',
-              target: '_blank'
-            },
-            {
-              label: 'IPO-гид',
-              type: 'btn',
-              url: 'https://fs.moex.com/f/19351/mosbirzha-ipo-guide2023-rus-book.pdf',
-              target: '_blank'
-            },
-            {
-              label: 'ESG-гид',
-              type: 'btn',
-              url: 'https://fs.moex.com/f/16010/mosbirzha-esg-rus-book-1012.pdf',
               target: '_blank'
             },
             {
