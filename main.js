@@ -99,6 +99,7 @@ class MessageWidget {
     createApp({
       data() {
         return {
+          toastShow: false,
           open: false,
           isChat: false,
           isTyping: false,
@@ -165,6 +166,15 @@ class MessageWidget {
         }
       },
       methods: {
+        refreshAnim() {
+          console.log('tut')
+          let el = document.querySelector('.widget_icon')
+          el.classList.remove('rotate')
+          el.offsetHeight
+          setTimeout(() => {
+            el.classList.add('rotate')
+          }, 10000)
+        },
         handleScroll(e) {
           const { scrollHeight, scrollTop, clientHeight } = e.target
 
@@ -176,6 +186,7 @@ class MessageWidget {
           }
         },
         async toggleOpen() {
+          this.toastShow = false
           window.dataLayer = window.dataLayer || []
           dataLayer.push({ 'event': 'data-event', 'eventCategory': 'chat_bot', 'eventAction': 'show_pop_up_chat_bot' })
           if (this.isLock) return
@@ -376,7 +387,13 @@ class MessageWidget {
           this.isPause = !this.isPause
         }
       },
-      mounted() { },
+      mounted() { 
+        setTimeout(() => {
+          if(this.firstOpen && window.innerWidth > 1024) {
+            this.toastShow = true
+          }
+        }, 7000)
+      },
       watch: {
         isStoriesPause: {
           handler: async function (value) { }
@@ -409,7 +426,7 @@ class MessageWidget {
               this.curBotMargin = `${document.querySelector('.message_actions')?.clientHeight + 20
                 }px`
               await timeout(1)
-              if(!this.lockScroll) {
+              if (!this.lockScroll) {
                 this.scrollToBot()
               }
             } else {

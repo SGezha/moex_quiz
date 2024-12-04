@@ -166,34 +166,67 @@
     <button @click="toggleOpen()" class="button_container">
       <div class="stories_circle">
         <div class="icon_line">
-          <svg width="500" height="500" xmlns="http://www.w3.org/2000/svg">
-            <g>
-              <line stroke="#fff" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_5" y2="231.07273"
-                x2="243.321696" y1="12.499993" x1="243.321696" stroke-width="12" fill="none" />
-              <line stroke="#fff" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_6" y2="404.189513"
-                x2="68.483157" y1="229.40571" x1="245.725963" fill-opacity="null" stroke-opacity="null"
-                stroke-width="12" fill="none" />
-              <line stroke="#fff" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_7" y2="412.548512"
-                x2="425.590067" y1="226.946701" x1="241.627607" fill-opacity="null" stroke-opacity="null"
-                stroke-width="12" fill="none" />
-            </g>
+          <svg class="progress-ring" width="82" height="82">
+            <defs>
+              <linearGradient id="gra1">
+                <stop offset="0%" stop-color="#9e2d89" />
+                <stop offset="100%" stop-color="#ce3cd5" />
+              </linearGradient>
+              <linearGradient id="gra2">
+                <stop offset="40%" stop-color="#e90814" />
+                <stop offset="100%" stop-color="#ce3cd5" />
+              </linearGradient>
+              <linearGradient id="gra3">
+                <stop offset="0%" stop-color="#C447FF" />
+                <stop offset="100%" stop-color="#FF0508" />
+              </linearGradient>
+            </defs>
+            <circle v-for="storie, ind in stories" :key="storie.id" :class="`${storie.watched ? 'watched' : ''}`" class="progress-ring__circle" :stroke="`url(#gra${ind+1})`" stroke-width="2" fill="transparent" r="40" cx="41"
+              cy="41" />
           </svg>
         </div>
-        <div v-for="storie in stories" :key="storie.id" :class="`${storie.watched ? 'watched' : ''}`" class="st_circle">
-        </div>
       </div>
-      <span v-if="!open" class="widget_icon">
-        <svg width="39" height="22" viewBox="0 0 39 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="13.9314" y="0.880371" width="25.0672" height="9.5769" fill="#FF0508" />
-          <rect x="0.324951" y="9.7229" width="38.6751" height="11.787" fill="#FF0508" />
-        </svg>
+      <span v-if="!open" class="widget_icon rotate" @animationend="refreshAnim">
+        <div class="front">
+          <div class="bg_white"></div>
+          <svg width="39" height="22" viewBox="0 0 39 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="13.9314" y="0.880371" width="25.0672" height="9.5769" fill="#FF0508" />
+            <rect x="0.324951" y="9.7229" width="38.6751" height="11.787" fill="#FF0508" />
+          </svg>
+        </div>
+        <div class="back">
+          <div class="bg_white"></div>
+          <svg width="39" height="22" viewBox="0 0 39 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="13.9314" y="0.880371" width="25.0672" height="9.5769" fill="#FF0508" />
+            <rect x="0.324951" y="9.7229" width="38.6751" height="11.787" fill="#FF0508" />
+          </svg>
+        </div>
       </span>
       <span v-else class="widget_icon">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M18 6L6 18" stroke="#FF0508" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           <path d="M6 6L18 18" stroke="#FF0508" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
+        <div class="bg_white"></div>
       </span>
     </button>
+    <Transition name="fade" mode="out-in">
+      <div v-if="toastShow" class="toast_block">
+        <div class="toast_left">
+          <div class="toast_text">
+            Акции или облигации: узнайте, что больше подходит вашей компании
+          </div>
+          <button class="toast_btn" @click="toggleOpen()">
+            Узнать подробнее
+          </button>
+        </div>
+        <button @click="toastShow = false" class="toast_close">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M18 6L6 18" stroke="#D1D2D5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M6 6L18 18" stroke="#D1D2D5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </div>
+    </Transition>
   </div>
 </template>
