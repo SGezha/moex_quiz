@@ -214,7 +214,7 @@
       <div v-if="toastShow" class="toast_block">
         <div class="toast_left">
           <div class="toast_text">
-            Акции или облигации: узнайте, что больше подходит вашей компании
+            Привлечь финансирование: узнайте, какой инструмент подходит вашей компании.
           </div>
           <button class="toast_btn" @click="toggleOpen()">
             Узнать подробнее

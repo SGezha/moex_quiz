@@ -389,10 +389,10 @@ class MessageWidget {
       },
       mounted() { 
         setTimeout(() => {
-          if(this.firstOpen && window.innerWidth > 1024) {
+          if(this.firstOpen) {
             this.toastShow = true
           }
-        }, 7000)
+        }, 3500)
       },
       watch: {
         isStoriesPause: {
