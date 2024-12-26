@@ -1,4 +1,4 @@
-export const data = {
+export const dataQuiz = {
   id: 'quiz_301024',
   initial: 'idle',
   states: {
